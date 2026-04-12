@@ -1,7 +1,7 @@
 import React from "react";
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, Image } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { useNavigation } from "@react-navigation/native";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const AppHeader = () => {
@@ -10,16 +10,26 @@ const AppHeader = () => {
 
   return (
     <View
-      className="flex-row items-center justify-between bg-white shadow-sm px-4 pb-5 pt-5 mb-2 round-lg"
+      className="flex-row items-center justify-between bg-white shadow-sm px-3 py-2 pt-5 mb-2 round-lg"
       style={{ paddingTop: insets.top + 10 }}
     >
-      <TouchableOpacity onPress={() => navigation.toggleDrawer?.()}>
-        <AntDesign name="menu-unfold" size={24} color="#111827" />
-      </TouchableOpacity>
+      <View className="flex-1 px-4 flex-row justify-between items-center">
+        <View className="items-center justify-center">
+          <Image
+            source={require("../../assets/tools-hub-Logo.webp")}
+            className="w-10 h-10"
+          />
+        </View>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.getParent()?.dispatch(DrawerActions.openDrawer())
+          }
+        >
+          <AntDesign name="menu-unfold" size={24} color="#111827" />
+        </TouchableOpacity>
+      </View>
 
-      <View className="items-center justify-center"></View>
-
-      <View style={{ width: 24 }} />
+      <View />
     </View>
   );
 };

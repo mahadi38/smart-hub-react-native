@@ -4,6 +4,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 import Home from "../src/Home";
 import AllTools from "../src/AllTools";
+import PdfScanner from "../src/PdfScanner";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,6 +20,23 @@ const TabNavigation = () => {
           ),
         }}
       />
+
+        <Tab.Screen
+        name="PdfScanner"
+        component={PdfScanner}
+        options={{
+          title: "Pdf Scanner",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="line-scan"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+
+
       <Tab.Screen
         name="AllTools"
         component={AllTools}
@@ -33,6 +51,7 @@ const TabNavigation = () => {
           ),
         }}
       />
+      
     </Tab.Navigator>
   );
 };
