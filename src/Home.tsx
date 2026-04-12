@@ -42,7 +42,7 @@ const Home = ({ navigation }: any) => {
   );
   return (
     <SafeAreaView
-      edges={["left", "right", "bottom"]}
+      edges={["left", "right"]}
       className="flex-1 bg-gray-100"
     >
       <AuthModal
@@ -72,14 +72,12 @@ const Home = ({ navigation }: any) => {
 
       
 
-      <View className="mx-3 mt-2 flex-1 rounded-3xl bg-white shadow-xl">
-
-        <View className="pt-2">
+      <View className="mx-3 my-3 mb-2 flex-1 rounded-3xl bg-white shadow-xl">
+        <View className="mt-2">
         <Text className="text-xl font-bold px-4 mx-auto text-slate-500">
           Popular Tools
         </Text>
       </View>
-
         <FlatList
           data={populerData}
           renderItem={renderTools}
@@ -89,7 +87,7 @@ const Home = ({ navigation }: any) => {
             justifyContent: "space-between",
             marginBottom: 10,
           }}
-          contentContainerStyle={{ paddingHorizontal: 12, paddingVertical: 14 }}
+          contentContainerStyle={{ paddingHorizontal: 12, paddingVertical: 9 }}
           className="flex-1 shadow-lg shadow-blue-700"
         />
       </View>

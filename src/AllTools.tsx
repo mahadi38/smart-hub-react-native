@@ -32,12 +32,9 @@ const AllTools = ({ navigation }: any) => {
   );
 
   return (
-    <SafeAreaView
-      edges={["left", "right", "bottom"]}
-      className="flex-1 bg-gray-100"
-    >
+    <SafeAreaView edges={["left", "right"]} className="flex-1 bg-gray-100">
       <View className="px-4 shadow-lg shadow-blue-500">
-        <View className="relative mb-1 shadow-lg shadow-blue-800 rounded-full">
+        <View className="relative shadow-lg mb-1 shadow-blue-800 rounded-full">
           <TextInput
             placeholder="Search tools..."
             className="bg-white rounded-full text-gray-600 px-4 py-3 pr-12 text-base shadow-sm border border-gray-200"
@@ -49,9 +46,9 @@ const AllTools = ({ navigation }: any) => {
         </View>
       </View>
 
-      <View className="mx-3 flex-1 rounded-3xl bg-white shadow-xl mt-1">
-        <View className="pt-2">
-          <Text className="text-xl font-bold px-4 mx-auto">All Tools</Text>
+      <View className="mx-3 mt-2 mb-2 flex-1 rounded-3xl bg-white shadow-xl">
+        <View className="mt-2">
+          <Text className="text-xl font-bold px-4 mx-auto text-slate-500">All Tools</Text>
         </View>
         <FlatList
           data={allToolsData}
@@ -62,7 +59,7 @@ const AllTools = ({ navigation }: any) => {
             justifyContent: "space-between",
             marginBottom: 10,
           }}
-          contentContainerStyle={{ paddingHorizontal: 12, paddingVertical: 14 }}
+          contentContainerStyle={{ paddingHorizontal: 12, paddingVertical: 9 }}
           className="flex-1 shadow-lg"
         />
       </View>

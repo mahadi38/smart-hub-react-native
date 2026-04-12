@@ -8,7 +8,6 @@ const UploadPDF = ({ navigation, route }: any) => {
   const [pickedFileName, setPickedFileName] = useState<string | null>(null);
   const toolTitle = route?.params?.toolTitle ?? "Upload PDF";
   console.log(route?.params);
-  
 
   const handlePickPdf = async () => {
     const result = await DocumentPicker.getDocumentAsync({
@@ -26,31 +25,36 @@ const UploadPDF = ({ navigation, route }: any) => {
     <SafeAreaView className="flex-1 bg-slate-50">
       <View className="px-5 pt-6 flex-1">
         <View className="mb-4 flex-row items-center gap-20">
-          
-        
-        <Pressable
-          onPress={() => navigation?.goBack?.()}
-          className="mb-4 h-11 w-11  items-center justify-center rounded-full bg-white border border-slate-200 shadow-sm"
-        >
-          <AntDesign name="arrow-left" size={20} color="#0F172A" />
-          
-        </Pressable>
-        <View className="border bg-white px-5 py-2 rounded-full border-slate-200 ">
-        <Text className="text-2xl font-bold text-slate-900">{toolTitle}</Text>
-        </View>
+          <Pressable
+            onPress={() => navigation?.goBack?.()}
+            className="mb-4 h-11 w-11  items-center justify-center rounded-full bg-white border border-slate-200 shadow-sm"
+          >
+            <AntDesign name="arrow-left" size={20} color="#0F172A" />
+          </Pressable>
+          <View className="border bg-white px-5 py-2 rounded-full border-slate-200 ">
+            <Text className="text-2xl font-bold text-slate-900">
+              {toolTitle}
+            </Text>
+          </View>
         </View>
         <View className="rounded-[32px] bg-white shadow-lg shadow-blue-500 border border-blue-100 p-6">
-            <View className="flex justify-center items-center">
-          <View className="h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 border border-blue-100 mb-4">
-            <AntDesign name={route?.params?.toolIcon || "file-pdf"} size={28} color={route?.params?.toolColor || "#2563EB"} />
-          </View>
-
-          <Text className="text-3xl font-bold text-slate-900">{toolTitle}</Text>
-          <Text className="mt-2 text-sm leading-6 text-slate-500">
-            Choose a PDF file from your phone and continue with a clean,
-            beautiful flow.
-          </Text>
+          <View className="flex justify-center items-center">
+            <View className="h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 border border-blue-100 mb-4">
+              <AntDesign
+                name={route?.params?.toolIcon || "file-pdf"}
+                size={28}
+                color={route?.params?.toolColor || "#2563EB"}
+              />
             </View>
+
+            <Text className="text-3xl font-bold text-slate-900">
+              {toolTitle}
+            </Text>
+            <Text className="mt-2 text-sm leading-6 text-slate-500">
+              Choose a PDF file from your phone and continue with a clean,
+              beautiful flow.
+            </Text>
+          </View>
           <Pressable
             onPress={handlePickPdf}
             className="mt-6 items-center justify-center rounded-full bg-blue-500 py-4 shadow-md shadow-blue-500 active:opacity-90"
