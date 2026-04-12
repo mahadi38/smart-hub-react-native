@@ -10,8 +10,8 @@ const AppHeader = () => {
 
   return (
     <View
-      className="flex-row items-center justify-between bg-white shadow-sm px-4 pb-5"
-      style={{ paddingTop: insets.top + 12 }}
+      className="flex-row items-center justify-between bg-white shadow-sm px-4 pb-5 pt-5 mb-2 round-lg"
+      style={{ paddingTop: insets.top + 10 }}
     >
       <TouchableOpacity onPress={() => navigation.toggleDrawer?.()}>
         <AntDesign name="menu-unfold" size={24} color="#111827" />

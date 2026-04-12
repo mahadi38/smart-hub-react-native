@@ -22,15 +22,22 @@ const AllTools = ({ navigation }: any) => {
       icon={item.icon}
       color={item.color}
       onPress={() =>
-        navigation?.navigate?.(item.route, { toolTitle: item.title ,toolIcon: item.icon, toolColor: item.color})
+        navigation?.navigate?.(item.route, {
+          toolTitle: item.title,
+          toolIcon: item.icon,
+          toolColor: item.color,
+        })
       }
     />
   );
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-100">
-      <View className="px-4 py-2 mt-3 shadow-lg shadow-blue-500">
-        <View className="relative shadow-lg shadow-blue-800 rounded-full">
+    <SafeAreaView
+      edges={["left", "right", "bottom"]}
+      className="flex-1 bg-gray-100"
+    >
+      <View className="px-4 shadow-lg shadow-blue-500">
+        <View className="relative mb-1 shadow-lg shadow-blue-800 rounded-full">
           <TextInput
             placeholder="Search tools..."
             className="bg-white rounded-full text-gray-600 px-4 py-3 pr-12 text-base shadow-sm border border-gray-200"
@@ -42,11 +49,10 @@ const AllTools = ({ navigation }: any) => {
         </View>
       </View>
 
-      <View className="shadow-md bg-white py-3 mx-3 mt-2 mb-2 shadow-blue-500 rounded-full">
-        <Text className="text-xl font-bold px-4 mx-auto">All Tools</Text>
-      </View>
-
-      <View className="mx-3 flex-1 rounded-3xl bg-white shadow-xl">
+      <View className="mx-3 flex-1 rounded-3xl bg-white shadow-xl mt-1">
+        <View className="pt-2">
+          <Text className="text-xl font-bold px-4 mx-auto">All Tools</Text>
+        </View>
         <FlatList
           data={allToolsData}
           renderItem={renderTools}

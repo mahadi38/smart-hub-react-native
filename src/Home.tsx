@@ -41,7 +41,10 @@ const Home = ({ navigation }: any) => {
     />
   );
   return (
-    <SafeAreaView className="flex-1 bg-gray-100">
+    <SafeAreaView
+      edges={["left", "right", "bottom"]}
+      className="flex-1 bg-gray-100"
+    >
       <AuthModal
         visible={authModalVisible}
         onClose={() => setAuthModalVisible(false)}
@@ -58,7 +61,7 @@ const Home = ({ navigation }: any) => {
             <AntDesign name="search" size={18} color="#6B7280" />
           </View>
         </View>
-        //make a profile image circle with expo vector icons
+
         <TouchableOpacity
           onPress={() => setAuthModalVisible(true)}
           className="h-10 w-10 items-center justify-center mr-2 rounded-full bg-blue-500"
@@ -67,13 +70,16 @@ const Home = ({ navigation }: any) => {
         </TouchableOpacity>
       </View>
 
-      <View className="shadow-md bg-white py-3 mx-3 my-2 shadow-blue-700 rounded-full">
+      
+
+      <View className="mx-3 mt-2 flex-1 rounded-3xl bg-white shadow-xl">
+
+        <View className="pt-2">
         <Text className="text-xl font-bold px-4 mx-auto text-slate-500">
           Popular Tools
         </Text>
       </View>
 
-      <View className="mx-3 my-3 flex-1 rounded-3xl bg-white shadow-xl">
         <FlatList
           data={populerData}
           renderItem={renderTools}
