@@ -10,6 +10,7 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
   return (
+    // Home Bottom tab
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
         name="Home"
@@ -20,6 +21,7 @@ const TabNavigation = () => {
           ),
         }}
       />
+        {/* PDF Scanner bottom tab */}
 
         <Tab.Screen
         name="PdfScanner"
@@ -36,6 +38,7 @@ const TabNavigation = () => {
         }}
       />
 
+        {/* All Tools Bottom Tab */}
 
       <Tab.Screen
         name="AllTools"

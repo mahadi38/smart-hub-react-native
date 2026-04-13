@@ -13,6 +13,7 @@ import ToolsIcons from "./components/shared/ToolsIcons";
 import { populerData } from "../conostant/poulerData";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import AuthModal from "./components/AuthModal";
+import SearchInput from "./components/shared/SearchInput";
 
 interface toolsItems {
   id: string;
@@ -26,6 +27,9 @@ const Home = ({ navigation }: any) => {
   const [authModalVisible, setAuthModalVisible] = useState(false);
 
   const renderTools = ({ item }: { item: toolsItems }) => (
+
+    // pressable component for each tool card in home screen, on pressing it navigates to the respective tool screen with the tool data as params
+
     <ToolsIcons
       id={item.id}
       title={item.title}
@@ -45,23 +49,17 @@ const Home = ({ navigation }: any) => {
       edges={["left", "right"]}
       className="flex-1 bg-gray-100"
     >
+      {/* Signup/signin button pressing it open the auth modal and search input field in home screen header */}
+
       <AuthModal
         visible={authModalVisible}
         onClose={() => setAuthModalVisible(false)}
       />
       <View className="px-4 flex-row justify-center items-center gap-2">
-        <View className="relative shadow-lg w-[310px] shadow-blue-500 rounded-full">
-          <TextInput
-            placeholder="Search tools..."
-            className="bg-white text-gray-600 rounded-full px-4 py-3 pr-12 text-base shadow-sm border border-gray-200"
-            placeholderTextColor="#9CA3AF"
-          />
 
-          <View className="absolute right-4 top-1/2 -translate-y-1/2">
-            <AntDesign name="search" size={18} color="#6B7280" />
-          </View>
-        </View>
+        {/* Search input field in home screen */}
 
+        <SearchInput className="w-[310px]" />
         <TouchableOpacity
           onPress={() => setAuthModalVisible(true)}
           className="h-10 w-10 items-center justify-center mr-2 rounded-full bg-blue-500"

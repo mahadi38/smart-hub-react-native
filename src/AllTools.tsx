@@ -5,6 +5,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 
 import ToolsIcons from "./components/shared/ToolsIcons";
 import { allToolsData } from "../conostant/poulerData";
+import SearchInput from "./components/shared/SearchInput";
 
 interface toolsItems {
   id: string;
@@ -34,22 +35,22 @@ const AllTools = ({ navigation }: any) => {
   return (
     <SafeAreaView edges={["left", "right"]} className="flex-1 bg-gray-100">
       <View className="px-4 shadow-lg shadow-blue-500">
-        <View className="relative shadow-lg mb-1 shadow-blue-800 rounded-full">
-          <TextInput
-            placeholder="Search tools..."
-            className="bg-white rounded-full text-gray-600 px-4 py-3 pr-12 text-base shadow-sm border border-gray-200"
-            placeholderTextColor="#9CA3AF"
-          />
-          <View className="absolute right-4 top-1/2 -translate-y-1/2">
-            <AntDesign name="search" size={18} color="#6B7280" />
-          </View>
-        </View>
+
+        {/* Search input */}
+
+      <SearchInput/>
       </View>
 
       <View className="mx-3 mt-2 mb-2 flex-1 rounded-3xl bg-white shadow-xl">
+
+        {/* All tools Tools list header */}
+
         <View className="mt-2">
           <Text className="text-xl font-bold px-4 mx-auto text-slate-500">All Tools</Text>
         </View>
+
+          {/* Flatlist For Alltools icon */}
+
         <FlatList
           data={allToolsData}
           renderItem={renderTools}

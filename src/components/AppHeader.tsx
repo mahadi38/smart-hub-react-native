@@ -14,6 +14,9 @@ const AppHeader = () => {
       style={{ paddingTop: insets.top + 10 }}
     >
       <View className="flex-1 px-4 py-1 flex-row justify-between items-center">
+
+        {/* Home and logo in AppHeader */}
+
         <View className="flex-row gap-2 font-sans items-center justify-center">
           <Image
             source={require("../../assets/tools-hub-Logo.webp")}
@@ -21,6 +24,9 @@ const AppHeader = () => {
           />
           <Text className="text-lg font-extrabold text-blue-500">Smart Tools Hub</Text>
         </View>
+        
+        {/* App Drawer button in App Header */}
+
         <TouchableOpacity
           onPress={() =>
             navigation.getParent()?.dispatch(DrawerActions.openDrawer())

@@ -11,12 +11,17 @@ interface ToolsIconsProps {
 }
 const ToolsIcons = ({ id, title, icon, onPress, color }: ToolsIconsProps) => {
   return (
+
+    // Tools card icon component used in Home and All tools screen
+
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.86}
       style={{ width: "31%" }}
       className="h-36 items-center justify-center px-3 py-4 mb-2 rounded-2xl bg-white border border-gray-100 shadow-lg shadow-blue-700"
     >
+      {/* Dynamic icon rendering based on the icon name passed as a prop from ant design icons library */}
+
       <View className="h-14 w-14 items-center justify-center rounded-full bg-blue-50 border border-blue-100">
         <Icon
           name={icon as any}
@@ -24,6 +29,9 @@ const ToolsIcons = ({ id, title, icon, onPress, color }: ToolsIconsProps) => {
           color={color ?? "rgba(0, 122, 255, 1)"}
         />
       </View>
+
+      {/* Card bottom title */}
+      
       <View className="mt-3 h-10 justify-center">
         <Text
           numberOfLines={2}

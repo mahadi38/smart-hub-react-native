@@ -16,16 +16,25 @@ const PdfScanner = () => {
   if (!permission.granted) {
     return (
       <View className="flex-1 items-center justify-center">
+
+        {/* Camera permission button */}
+
         <TouchableOpacity onPress={requestPermission} className="bg-blue-500 px-4 py-2 rounded-lg">
           <Text className="text-white font-bold">Allow Camera</Text>
         </TouchableOpacity>
       </View>
     );   
   }
+
+  // Photo Storage from camera and save to state logic
+
   const takePhoto = async () => {
     const shot = await cameraRef.current?.takePictureAsync({ quality: 0.9 });
     if (shot?.uri) setPhotos((prev) => [...prev, shot.uri]);
   };
+
+  // Take photo from photos and create PDF logic
+
 const createPdf = async () => {
     if (!photos.length) return Alert.alert("No pages", "Capture at least one page.");
     const html = `
@@ -43,8 +52,14 @@ const createPdf = async () => {
 
    return (
     <View className="flex-1 bg-black">
+
+      {/* Live camera view from expo-camera and photo preview  */}
+
       <CameraView ref={cameraRef} style={{ flex: 1 }} facing={facing} />
       <View className="p-3 bg-white">
+        
+        {/* Craptured photos preview in horizontal scroll view and buttons to flip camera, take photo and create PDF from photos */}
+
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {photos.map((p) => (
             <Image key={p} source={{ uri: p }} style={{ width: 56, height: 56, marginRight: 8, borderRadius: 8 }} />
