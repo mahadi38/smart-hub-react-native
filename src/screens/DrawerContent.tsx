@@ -13,7 +13,7 @@ const DrawerContent = (props: any) => {
     // Custom Drawer content component which is used in Drawer Navigation
     <DrawerContentScrollView
       {...props}
-      contentContainerStyle={{ paddingTop:insets.top + 12 }}
+      contentContainerStyle={{ paddingTop: insets.top + 12 }}
     >
       <View className="px-4 mb-4" style={{ paddingTop: insets.top + 12 }}>
         <View className="flex-row items-center justify-between">
@@ -33,14 +33,22 @@ const DrawerContent = (props: any) => {
         <TouchableOpacity
           key={tool.id}
           onPress={() => {
-            navigation.navigate("MainTabs", {
-              screen: "AllTools",
-              params: {
-                toolTitle: tool.title,
-                toolIcon: tool.icon,
-                toolColor: tool.color,
-              },
-            });
+            const toolParams = {
+              toolTitle: tool.title,
+              toolIcon: tool.icon,
+              toolColor: tool.color,
+            };
+
+            const rootNavigation = navigation.getParent();
+            if (rootNavigation) {
+              rootNavigation.navigate(tool.route, toolParams);
+            } else {
+              navigation.navigate("MainTabs", {
+                screen: "AllTools",
+                params: toolParams,
+              });
+            }
+
             navigation.closeDrawer();
           }}
         >

@@ -1,44 +1,79 @@
-import { View, Text, Pressable } from "react-native";
-import React, { useState } from "react";
+import { View, Text, Pressable, Alert } from "react-native";
+import React, { useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as DocumentPicker from "expo-document-picker";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import PdfMaker, { PdfMakerRef } from "../components/PdfMaker";
+import TostNotification from "../components/TostNotification";
 
 const UploadPDF = ({ navigation, route }: any) => {
+  const pdfMakerRef = useRef<PdfMakerRef>(null);
   const [pickedFileName, setPickedFileName] = useState<string | null>(null);
+  const [imageUris, setImageUris] = useState<string[]>([]);
+  const [generatedPdfUri, setGeneratedPdfUri] = useState<string | null>(null);
+  const [showBottomToast, setShowBottomToast] = useState(false);
   const toolTitle = route?.params?.toolTitle ?? "Upload PDF";
+  const isImageToPdf = toolTitle.toLowerCase() === "image to pdf";
 
   const handlePickPdf = async () => {
-    
     // File picker configuration to allow only PDF and document files, and to copy the selected file to cache Directory.
 
     const result = await DocumentPicker.getDocumentAsync({
-      type: [
-        "image/*",
-        "application/pdf",
-        "application/msword",
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        "application/vnd.ms-excel",
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-      ],
+      type: isImageToPdf
+        ? ["image/*"]
+        : [
+            "image/*",
+            "application/pdf",
+            "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "application/vnd.ms-excel",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          ],
       copyToCacheDirectory: true,
-      multiple: false,
+      multiple: isImageToPdf,
     });
 
     // If the user picked a file, store its name; if no name exists, show default text
 
     if (!result.canceled) {
-      setPickedFileName(result.assets[0]?.name ?? "Selected PDF");
+      setPickedFileName(result.assets[0]?.name ?? "Selected file");
+
+      if (isImageToPdf) {
+        const selectedImages = result.assets.map((asset) => asset.uri);
+        setImageUris(selectedImages);
+
+        const pdfUri = await pdfMakerRef.current?.createPdf(selectedImages);
+        if (pdfUri) {
+          setGeneratedPdfUri(pdfUri);
+          setShowBottomToast(true);
+        }
+      }
     }
+  };
+
+  const handleViewPdf = async () => {
+    if (!generatedPdfUri) {
+      Alert.alert("No PDF yet", "Create a PDF first from an image.");
+      return;
+    }
+
+    navigation.navigate("PdfViewer", {
+      pdfUri: generatedPdfUri,
+      title: toolTitle,
+    });
   };
 
   return (
     <SafeAreaView className="flex-1 bg-slate-50">
+      <PdfMaker
+        ref={pdfMakerRef}
+        images={imageUris}
+        onPdfReady={setGeneratedPdfUri}
+      />
       <View className="px-5 mt-5 flex-1">
         <View className="mb-4 h-11 justify-center relative">
-
           {/* Go Back Arrow Button */}
-          
+
           <Pressable
             onPress={() => navigation?.goBack?.()}
             className="h-11 w-11 items-center justify-center rounded-full bg-white border border-slate-200 shadow-sm z-10"
@@ -46,12 +81,11 @@ const UploadPDF = ({ navigation, route }: any) => {
             <AntDesign name="arrow-left" size={20} color="#0F172A" />
           </Pressable>
           <View className="absolute left-0 right-0 items-center">
-
             {/* uplode pdf Title */}
 
             <View className="border bg-white px-5 py-2 rounded-full border-slate-200">
               <Text className="text-2xl font-bold text-slate-900">
-                  Choose a File
+                Choose a File
               </Text>
             </View>
           </View>
@@ -61,8 +95,7 @@ const UploadPDF = ({ navigation, route }: any) => {
 
         <View className="rounded-[32px] bg-white shadow-lg shadow-blue-500 border border-blue-100 p-6">
           <View className="flex justify-center items-center">
-
-          {/* Dynamic icon and it's color passed from home or AllTools or nevigation drawer */}
+            {/* Dynamic icon and it's color passed from home or AllTools or nevigation drawer */}
 
             <View className="h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 border border-blue-100 mb-4">
               <AntDesign
@@ -78,8 +111,9 @@ const UploadPDF = ({ navigation, route }: any) => {
               {toolTitle}
             </Text>
             <Text className="mt-2 text-sm leading-6 text-slate-500">
-              Choose a PDF file from your phone and continue with a clean,
-              beautiful flow.
+              {isImageToPdf
+                ? "Choose image files and convert them to PDF instantly."
+                : "Choose a PDF file from your phone and continue with a clean, beautiful flow."}
             </Text>
           </View>
 
@@ -92,7 +126,7 @@ const UploadPDF = ({ navigation, route }: any) => {
             <View className="flex-row items-center">
               <AntDesign name="cloud-upload" size={20} color="#FFFFFF" />
               <Text className="ml-3 text-base font-semibold text-white">
-                Uploade
+                Upload
               </Text>
             </View>
           </Pressable>
@@ -104,24 +138,23 @@ const UploadPDF = ({ navigation, route }: any) => {
               Selected file
             </Text>
             <Text className="mt-2 text-sm font-medium text-slate-700">
-              {pickedFileName ?? "No PDF selected yet"}
+              {pickedFileName ?? "No file selected yet"}
             </Text>
           </View>
 
           {/* Download File button */}
 
-        <Pressable
-            
-            className="mt-6 items-center justify-center rounded-full bg-blue-500 py-4 shadow-md shadow-blue-500 active:opacity-90"
+          <Pressable
+            onPress={handleViewPdf}
+            className={`mt-6 items-center justify-center rounded-full py-4 shadow-md active:opacity-90 ${generatedPdfUri ? "bg-blue-500 shadow-blue-500" : "bg-slate-300 shadow-slate-300"}`}
           >
             <View className="flex-row items-center">
-              <AntDesign name="cloud-upload" size={20} color="#FFFFFF" />
+              <AntDesign name="eye" size={20} color="#FFFFFF" />
               <Text className="ml-3 text-base font-semibold text-white">
-                Download
+                View PDF
               </Text>
             </View>
           </Pressable>
-
         </View>
 
         {/* Bottom section with two info cards */}
@@ -141,6 +174,12 @@ const UploadPDF = ({ navigation, route }: any) => {
           </View>
         </View>
       </View>
+
+      <TostNotification
+        visible={showBottomToast}
+        message="PDF created. Tap View PDF."
+        onHide={() => setShowBottomToast(false)}
+      />
     </SafeAreaView>
   );
 };

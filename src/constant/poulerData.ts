@@ -11,7 +11,7 @@ export const populerData = [
     title: "Marge PDF",
     icon: "fork",
     color: "rgba(59, 130, 246, 1)",
-    route: "UploadPDF",
+    route: "MargePDF",
   },
   {
     id: "3",
@@ -55,25 +55,18 @@ export const populerData = [
     color: "rgba(37, 99, 235, 1)",
     route: "UploadPDF",
   },
+
   {
     id: "9",
-    title: "Merge PDF",
-    icon: "branches",
-    color: "rgba(14, 165, 233, 1)",
-    route: "UploadPDF",
-  },
-  {
-    id: "10",
-    title: "PDF Scanner",
+    title: "QR Code Scanner",
     icon: "scan",
     color: "rgba(14, 165, 233, 1)",
-    route: "UploadPDF",
+    route: "QrScanner",
   },
-
 ];
 
 export const allToolsData = [
-    {
+  {
     id: "1",
     title: "Compress PDF",
     icon: "compress",
@@ -85,9 +78,9 @@ export const allToolsData = [
     title: "Merge PDF",
     icon: "branches",
     color: "rgba(14, 165, 233, 1)",
-    route: "UploadPDF",
+    route: "MargePDF",
   },
-    {
+  {
     id: "3",
     title: "Excel to PDF",
     icon: "file-excel",
@@ -101,70 +94,62 @@ export const allToolsData = [
     color: "rgba(249, 115, 22, 1)",
     route: "UploadPDF",
   },
-   {
+  {
     id: "5",
     title: "Page Number",
     icon: "field-number",
     color: "rgba(139, 92, 246, 1)",
     route: "UploadPDF",
   },
+
   {
     id: "6",
-    title: "Marge PDF",
-    icon: "fork",
-    color: "rgba(59, 130, 246, 1)",
+    title: "Add Header & Footer",
+    icon: "file-text",
+    color: "rgba(16, 185, 129, 1)",
     route: "UploadPDF",
   },
   {
     id: "7",
-    title: "Add Header & Footer",
-    icon: "file-text",    
-    color: "rgba(16, 185, 129, 1)",    
-    route: "UploadPDF",
-  },
-  {
-    id: "8",
     title: "Pdf Watermark",
     icon: "highlight",
     color: "rgba(245, 158, 11, 1)",
     route: "UploadPDF",
   },
   {
-    id: "9",
+    id: "8",
     title: "Word to PDF",
     icon: "file-word",
     color: "rgba(37, 99, 235, 1)",
     route: "UploadPDF",
   },
-  
+
   {
-    id: "10",
+    id: "9",
     title: "QR Code Scanner",
     icon: "scan",
     color: "rgba(14, 165, 233, 1)",
-    route: "UploadPDF",
+    route: "QrScanner",
   },
   {
-    id: "11",
+    id: "10",
     title: "Crop PDF",
     icon: "copyright-circle",
     color: "rgba(16, 185, 129, 1)",
     route: "UploadPDF",
   },
   {
-    id: "12",
+    id: "11",
     title: "Resize PDF",
     icon: "block",
     color: "rgba(245, 40, 145, 0.8)",
     route: "UploadPDF",
   },
   {
-    id: "13",
+    id: "12",
     title: "File to ZIP",
     icon: "file-zip",
     color: "rrgba(37, 99, 235, 1)",
     route: "UploadPDF",
   },
-
-]
-
+];
