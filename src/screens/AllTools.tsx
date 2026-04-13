@@ -1,11 +1,10 @@
-import { View, Text, FlatList, TextInput } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import AntDesign from "@expo/vector-icons/AntDesign";
-
-import ToolsIcons from "./components/shared/ToolsIcons";
-import { allToolsData } from "../conostant/poulerData";
-import SearchInput from "./components/shared/SearchInput";
+import ToolsIcons from "../components/shared/ToolsIcons";
+import { allToolsData } from "../constant/poulerData";
+import SearchInput from "../components/shared/SearchInput";
+import AppHeader from "../AppHeader";
 
 interface toolsItems {
   id: string;
@@ -34,22 +33,23 @@ const AllTools = ({ navigation }: any) => {
 
   return (
     <SafeAreaView edges={["left", "right"]} className="flex-1 bg-gray-100">
-      <View className="px-4 shadow-lg shadow-blue-500">
+      <AppHeader />
+      <View className="px-4 pt-1 shadow-lg shadow-blue-500">
+        {/* Search input component*/}
 
-        {/* Search input */}
-
-      <SearchInput/>
+        <SearchInput className="mb-1" />
       </View>
 
       <View className="mx-3 mt-2 mb-2 flex-1 rounded-3xl bg-white shadow-xl">
-
         {/* All tools Tools list header */}
 
         <View className="mt-2">
-          <Text className="text-xl font-bold px-4 mx-auto text-slate-500">All Tools</Text>
+          <Text className="text-xl font-bold px-4 mx-auto text-slate-500">
+            All Tools
+          </Text>
         </View>
 
-          {/* Flatlist For Alltools icon */}
+        {/* Flatlist For Alltools icon */}
 
         <FlatList
           data={allToolsData}

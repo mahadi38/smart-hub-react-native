@@ -1,7 +1,7 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import StackNavigation from "./StackNavigation";
-import DrawerContent from "../src/components/DrawerContent";
+import TabNavigation from "./TabNavigation";
+import DrawerContent from "../screens/DrawerContent";
 
 const Drawer = createDrawerNavigator();
 
@@ -11,15 +11,14 @@ const DrawerNavigation = () => {
       screenOptions={{
         headerShown: false,
         drawerPosition: "left",
-        drawerStyle:{
-          marginTop: 35,
-        }
+        drawerStyle: {
+      marginTop: 30,
+    },
       }}
-       drawerContent={(props) => <DrawerContent {...props} />}
+      drawerContent={(props) => <DrawerContent {...props} />}
     >
-<Drawer.Screen name="MainStack" component={StackNavigation} />
+      <Drawer.Screen name="MainTabs" component={TabNavigation} />
     </Drawer.Navigator>
-    
   );
 };
 

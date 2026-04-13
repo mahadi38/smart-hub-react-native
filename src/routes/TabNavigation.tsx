@@ -2,9 +2,9 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import Home from "../src/Home";
-import AllTools from "../src/AllTools";
-import PdfScanner from "../src/PdfScanner";
+import Home from "../screens/Home";
+import AllTools from "../screens/AllTools";
+import PdfScanner from "../screens/PdfScanner";
 
 const Tab = createBottomTabNavigator();
 
@@ -21,9 +21,9 @@ const TabNavigation = () => {
           ),
         }}
       />
-        {/* PDF Scanner bottom tab */}
+      {/* PDF Scanner bottom tab */}
 
-        <Tab.Screen
+      <Tab.Screen
         name="PdfScanner"
         component={PdfScanner}
         options={{
@@ -38,7 +38,7 @@ const TabNavigation = () => {
         }}
       />
 
-        {/* All Tools Bottom Tab */}
+      {/* All Tools Bottom Tab */}
 
       <Tab.Screen
         name="AllTools"
@@ -54,7 +54,6 @@ const TabNavigation = () => {
           ),
         }}
       />
-      
     </Tab.Navigator>
   );
 };

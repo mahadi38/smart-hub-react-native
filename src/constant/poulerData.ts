@@ -139,7 +139,7 @@ export const allToolsData = [
   
   {
     id: "10",
-    title: "PDF Scanner",
+    title: "QR Code Scanner",
     icon: "scan",
     color: "rgba(14, 165, 233, 1)",
     route: "UploadPDF",

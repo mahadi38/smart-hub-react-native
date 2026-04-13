@@ -9,6 +9,7 @@ const UploadPDF = ({ navigation, route }: any) => {
   const toolTitle = route?.params?.toolTitle ?? "Upload PDF";
 
   const handlePickPdf = async () => {
+    
     // File picker configuration to allow only PDF and document files, and to copy the selected file to cache Directory.
 
     const result = await DocumentPicker.getDocumentAsync({
@@ -33,7 +34,7 @@ const UploadPDF = ({ navigation, route }: any) => {
 
   return (
     <SafeAreaView className="flex-1 bg-slate-50">
-      <View className="px-5 -mt-4 flex-1">
+      <View className="px-5 mt-5 flex-1">
         <View className="mb-4 h-11 justify-center relative">
 
           {/* Go Back Arrow Button */}
