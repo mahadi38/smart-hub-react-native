@@ -1,12 +1,19 @@
-import { View, Text, TextInput } from 'react-native'
+import { View,TextInput } from 'react-native'
 import React from 'react'
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+type Props = {
+  value: string;
+  onChangeText: (text: string) => void;
+  className?: string;
+};
 
 
-const SearchInput = ({ className = "" }: any) => {
+const SearchInput = ({ value, onChangeText, className }: Props) => {
   return (
     <View className={`relative shadow-lg  shadow-blue-500 rounded-full ${className}`}>
           <TextInput
+          value={value}
+          onChangeText={onChangeText}
             placeholder="Search tools..."
             className="bg-white text-gray-600 rounded-full px-4 py-3 pr-12 text-base shadow-sm border border-gray-200"
             placeholderTextColor="#9CA3AF"

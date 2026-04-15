@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { allToolsData } from "../constant/poulerData";
+import { allToolsData } from "../constant/AllFeatureData";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 const DrawerContent = (props: any) => {

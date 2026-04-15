@@ -31,7 +31,7 @@ export const populerData = [
     id: "5",
     title: "Add Header & Footer",
     icon: "file-text",
-    color: "rgba(16, 185, 129, 1)",
+    color: "rgba(5, 132, 137, 0.8)",
     route: "AddHeaderFooter",
   },
   {
@@ -81,7 +81,7 @@ export const populerData = [
     id: "12",
     title: "Crop PDF",
     icon: "copyright-circle",
-    color: "rgba(16, 185, 129, 1)",
+    color: "rgba(152, 0, 0, 0.8)",
     route: "CropPdf",
   },
 ];
@@ -127,7 +127,7 @@ export const allToolsData = [
     id: "6",
     title: "Add Header & Footer",
     icon: "file-text",
-    color: "rgba(16, 185, 129, 1)",
+    color: "rgba(5, 132, 137, 0.8)",
     route: "AddHeaderFooter",
   },
   {
@@ -163,7 +163,7 @@ export const allToolsData = [
     id: "11",
     title: "Crop PDF",
     icon: "copyright-circle",
-    color: "rgba(16, 185, 129, 1)",
+    color: "rgba(152, 0, 0, 0.8)",
     route: "CropPdf",
   },
   {

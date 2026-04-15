@@ -1,8 +1,8 @@
 import { View, Text, FlatList } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ToolsIcons from "../components/shared/ToolsIcons";
-import { allToolsData } from "../constant/poulerData";
+import { allToolsData } from "../constant/AllFeatureData";
 import SearchInput from "../components/shared/SearchInput";
 import AppHeader from "../AppHeader";
 
@@ -15,6 +15,7 @@ interface toolsItems {
 }
 
 const AllTools = ({ navigation }: any) => {
+   const [query, setQuery] = useState("");
   const renderTools = ({ item }: { item: toolsItems }) => (
     <ToolsIcons
       id={item.id}
@@ -37,7 +38,7 @@ const AllTools = ({ navigation }: any) => {
       <View className="px-4 pt-1 shadow-lg shadow-blue-500">
         {/* Search input component*/}
 
-        <SearchInput className="mb-1" />
+        <SearchInput value={query} onChangeText={setQuery} className="mb-1" />
       </View>
 
       <View className="mx-3 mt-2 mb-2 flex-1 rounded-3xl bg-white shadow-xl">

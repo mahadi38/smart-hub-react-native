@@ -5,7 +5,7 @@ import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system/legacy";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import PDFDocument from "pdf-lib/cjs/api/PDFDocument";
-import TostNotification from "./TostNotification";
+import TostNotification from "../components/TostNotification";
 import { savePdfToMyPdfFolderFromUri } from "../utils/PdfStorage";
 
 const MargePDF = ({ navigation, route }: any) => {
@@ -138,8 +138,7 @@ const MargePDF = ({ navigation, route }: any) => {
             <View className="flex-row items-center">
               <AntDesign name="cloud-upload" size={20} color="#FFFFFF" />
               <Text className="ml-3 text-base font-semibold text-white">
-                Select PDFs
-  Touchab
+                Select PDFs Touchab
               </Text>
             </View>
           </Pressable>

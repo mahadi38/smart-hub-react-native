@@ -1,14 +1,9 @@
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, FlatList } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import ToolsIcons from "../components/shared/ToolsIcons";
-import { populerData } from "../constant/poulerData";
+import { populerData } from "../constant/AllFeatureData";
 
 import SearchInput from "../components/shared/SearchInput";
 import AppHeader from "../AppHeader";
@@ -22,7 +17,11 @@ interface toolsItems {
 }
 
 const Home = ({ navigation }: any) => {
+  const [searchText, setSearchText] = useState("");
 
+  const filteredData= populerData.filter((item) =>
+    item.title.toLowerCase().includes(searchText.toLowerCase())
+  );
   const renderTools = ({ item }: { item: toolsItems }) => (
     // pressable component for each tool card in home screen, on pressing it navigates to the respective tool.
 
@@ -41,19 +40,16 @@ const Home = ({ navigation }: any) => {
     />
   );
   return (
-    <SafeAreaView edges={["left", "right"]} className="flex-1 bg-gray-100">
+    <SafeAreaView edges={[]} className="flex-1 bg-gray-100">
       <AppHeader />
       {/* Signup/signin button pressing it open the auth modal and search input field in home screen header */}
 
-      
       <View className="px-4 pt-1 flex-row justify-center items-center gap-2">
         {/* Search input field in home screen */}
 
-        <SearchInput className="w-full" />
+        <SearchInput value={searchText} onChangeText={setSearchText} className="w-full" />
 
         {/* signin/signup button in home screen */}
-
-        
       </View>
 
       {/* Home screen body with popular tools list using flatlist */}
