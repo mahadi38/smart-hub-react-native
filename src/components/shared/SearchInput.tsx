@@ -1,6 +1,6 @@
 import { View, Text, TextInput } from 'react-native'
 import React from 'react'
-import AntDesign from "@expo/vector-icons/AntDesign";
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 
 const SearchInput = ({ className = "" }: any) => {
@@ -15,7 +15,8 @@ const SearchInput = ({ className = "" }: any) => {
           {/* Search icon inside search input field*/}
 
           <View className="absolute right-4 top-1/2 -translate-y-1/2">
-            <AntDesign name="search" size={18} color="#6B7280" />
+            
+            <FontAwesome name="search" size={18} color="#6B7280" />
           </View>
         </View>
   )

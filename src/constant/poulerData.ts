@@ -17,7 +17,7 @@ export const populerData = [
     id: "3",
     title: "File",
     icon: "folder-open",
-    color: "rgba(59, 130, 246, 1)",
+    color: "rgba(14, 179, 16, 1)",
     route: "FileManager",
   },
   {
@@ -77,6 +77,13 @@ export const populerData = [
     color: "rgba(14, 165, 233, 1)",
     route: "QrScanner",
   },
+  {
+    id: "12",
+    title: "Crop PDF",
+    icon: "copyright-circle",
+    color: "rgba(16, 185, 129, 1)",
+    route: "CropPdf",
+  },
 ];
 
 export const allToolsData = [
@@ -89,17 +96,17 @@ export const allToolsData = [
   },
   {
     id: "2",
-    title: "Merge PDF",
-    icon: "branches",
-    color: "rgba(14, 165, 233, 1)",
+    title: "Marge PDF",
+    icon: "fork",
+    color: "rgba(59, 130, 246, 1)",
     route: "MargePDF",
   },
   {
     id: "3",
-    title: "Excel to PDF",
-    icon: "file-excel",
+    title: "QR Code Generator",
+    icon: "qrcode",
     color: "rgba(34, 197, 94, 1)",
-    route: "UploadPDF",
+    route: "QrGenerator",
   },
   {
     id: "4",
@@ -130,20 +137,20 @@ export const allToolsData = [
     color: "rgba(245, 158, 11, 1)",
     route: "PdfWatermark",
   },
-  {
+   {
     id: "8",
-    title: "Word to PDF",
-    icon: "file-word",
-    color: "rgba(37, 99, 235, 1)",
-    route: "UploadPDF",
+    title: "File",
+    icon: "folder-open",
+    color: "rgba(59, 130, 246, 1)",
+    route: "FileManager",
   },
 
   {
     id: "9",
-    title: "QR Code Generator",
-    icon: "qrcode",
-    color: "rgba(34, 197, 94, 1)",
-    route: "QrGenerator",
+    title: "View PDF",
+    icon: "file-pdf",
+    color: "rgba(59, 130, 246, 1)",
+    route: "FileManager",
   },
   {
     id: "10",
@@ -157,7 +164,7 @@ export const allToolsData = [
     title: "Crop PDF",
     icon: "copyright-circle",
     color: "rgba(16, 185, 129, 1)",
-    route: "UploadPDF",
+    route: "CropPdf",
   },
   {
     id: "12",

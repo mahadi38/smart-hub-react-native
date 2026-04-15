@@ -114,7 +114,7 @@ const PdfScanner = ({ navigation }: any) => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={createPdf}
-            className="bg-blue-500 px-4  rounded-lg"
+            className="bg-blue-500 px-4 rounded-lg"
           >
             <Text className="text-white py-2 font-bold">Make PDF</Text>
           </TouchableOpacity>

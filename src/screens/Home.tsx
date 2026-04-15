@@ -9,8 +9,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import ToolsIcons from "../components/shared/ToolsIcons";
 import { populerData } from "../constant/poulerData";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import AuthModal from "./AuthModal";
+
 import SearchInput from "../components/shared/SearchInput";
 import AppHeader from "../AppHeader";
 
@@ -23,7 +22,6 @@ interface toolsItems {
 }
 
 const Home = ({ navigation }: any) => {
-  const [authModalVisible, setAuthModalVisible] = useState(false);
 
   const renderTools = ({ item }: { item: toolsItems }) => (
     // pressable component for each tool card in home screen, on pressing it navigates to the respective tool.
@@ -47,23 +45,15 @@ const Home = ({ navigation }: any) => {
       <AppHeader />
       {/* Signup/signin button pressing it open the auth modal and search input field in home screen header */}
 
-      <AuthModal
-        visible={authModalVisible}
-        onClose={() => setAuthModalVisible(false)}
-      />
+      
       <View className="px-4 pt-1 flex-row justify-center items-center gap-2">
         {/* Search input field in home screen */}
 
-        <SearchInput className="w-[310px]" />
+        <SearchInput className="w-full" />
 
         {/* signin/signup button in home screen */}
 
-        <TouchableOpacity
-          onPress={() => setAuthModalVisible(true)}
-          className="h-10 w-10 items-center justify-center mr-2 rounded-full bg-blue-500"
-        >
-          <AntDesign name="user" size={18} color="#FFFFFF" />
-        </TouchableOpacity>
+        
       </View>
 
       {/* Home screen body with popular tools list using flatlist */}

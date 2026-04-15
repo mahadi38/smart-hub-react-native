@@ -13,6 +13,7 @@ import CompressPDF from "../screens/CompressPDF";
 import QrGenerator from "../screens/QrGenerator";
 import PdfWatermark from "../screens/PdfWatermark";
 import ResizePDF from "../screens/ResizePDF";
+import CropPdf from "../screens/CropPdf";
 
 const RootStack = createNativeStackNavigator();
 
@@ -31,6 +32,7 @@ const RootNavigation = () => {
       <RootStack.Screen name="QrGenerator" component={QrGenerator} />
       <RootStack.Screen name="PdfWatermark" component={PdfWatermark} />
       <RootStack.Screen name="ResizePDF" component={ResizePDF} />
+      <RootStack.Screen name="CropPdf" component={CropPdf} />
     </RootStack.Navigator>
   );
 };
