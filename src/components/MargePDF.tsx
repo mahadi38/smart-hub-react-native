@@ -6,6 +6,7 @@ import * as FileSystem from "expo-file-system/legacy";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import PDFDocument from "pdf-lib/cjs/api/PDFDocument";
 import TostNotification from "./TostNotification";
+import { savePdfToMyPdfFolderFromUri } from "../utils/PdfStorage";
 
 const MargePDF = ({ navigation, route }: any) => {
   const [pickedFiles, setPickedFiles] = useState<
@@ -74,8 +75,8 @@ const MargePDF = ({ navigation, route }: any) => {
       await FileSystem.writeAsStringAsync(outputPath, mergedBase64, {
         encoding: FileSystem.EncodingType.Base64,
       });
-
-      setMergedPdfUri(outputPath);
+      const saved = await savePdfToMyPdfFolderFromUri(outputPath, "merged");
+      setMergedPdfUri(saved.fileUri);
       setShowToast(true);
     } catch (error) {
       Alert.alert("Merge failed", "Could not merge selected PDFs.");
@@ -138,6 +139,7 @@ const MargePDF = ({ navigation, route }: any) => {
               <AntDesign name="cloud-upload" size={20} color="#FFFFFF" />
               <Text className="ml-3 text-base font-semibold text-white">
                 Select PDFs
+  Touchab
               </Text>
             </View>
           </Pressable>

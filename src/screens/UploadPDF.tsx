@@ -5,6 +5,7 @@ import * as DocumentPicker from "expo-document-picker";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import PdfMaker, { PdfMakerRef } from "../components/PdfMaker";
 import TostNotification from "../components/TostNotification";
+import { savePdfToMyPdfFolderFromUri } from "../utils/PdfStorage";
 
 const UploadPDF = ({ navigation, route }: any) => {
   const pdfMakerRef = useRef<PdfMakerRef>(null);
@@ -44,7 +45,8 @@ const UploadPDF = ({ navigation, route }: any) => {
 
         const pdfUri = await pdfMakerRef.current?.createPdf(selectedImages);
         if (pdfUri) {
-          setGeneratedPdfUri(pdfUri);
+          const saved = await savePdfToMyPdfFolderFromUri(pdfUri, "image-to-pdf");
+          setGeneratedPdfUri(saved.fileUri);
           setShowBottomToast(true);
         }
       }

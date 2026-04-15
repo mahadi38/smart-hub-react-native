@@ -1,12 +1,15 @@
-import { View, Text, TouchableOpacity, Alert, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Pressable } from "react-native";
 import React, { useRef, useState } from "react";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { Image } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import PdfMaker, { PdfMakerRef } from "../components/PdfMaker";
+import { savePdfToMyPdfFolderFromUri } from "../utils/PdfStorage";
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const PdfScanner = ({ navigation }: any) => {
   const [permission, requestPermission] = useCameraPermissions();
+  const [isFlashOn, setIsFlashOn] = useState(false);
   const cameraRef = useRef<CameraView>(null);
   const pdfMakerRef = useRef<PdfMakerRef>(null);
   const [photos, setPhotos] = useState<string[]>([]);
@@ -40,9 +43,11 @@ const PdfScanner = ({ navigation }: any) => {
     const uri = await pdfMakerRef.current?.createPdf();
     if (!uri) return;
 
-    setPdfUri(uri);
+    const saved = await savePdfToMyPdfFolderFromUri(uri, "scanner");
+
+    setPdfUri(saved.fileUri);
     navigation.navigate("PdfViewer", {
-      pdfUri: uri,
+      pdfUri: saved.fileUri,
       title: "Scanned PDF",
     });
   };
@@ -60,6 +65,19 @@ const PdfScanner = ({ navigation }: any) => {
     <View className="flex-1 bg-black">
       <PdfMaker ref={pdfMakerRef} images={photos} onPdfReady={setPdfUri} />
 
+   {/* Flash icon for turn on flash light */}
+
+      <View className="absolute top-6 right-0 z-10 p-4">
+  <Pressable
+    onPress={() => setIsFlashOn(!isFlashOn)}
+    className={`h-12 w-12 items-center justify-center rounded-full ${
+      isFlashOn ? "bg-yellow-400" : "bg-gray-600"
+    }`}
+  >
+    <Ionicons name="flash" size={24} color="black" />
+  </Pressable>
+</View>
+
       {/* Live camera view from expo-camera and photo preview  */}
 
       <CameraView
@@ -67,6 +85,7 @@ const PdfScanner = ({ navigation }: any) => {
         style={{ flex: 1 }}
         facing={facing}
         ratio="4:3"
+        enableTorch={isFlashOn}
       />
       <View className="p-3 bg-white">
         {/* Craptured photos preview in horizontal scroll view and buttons to flip camera, take photo and create PDF from photos */}

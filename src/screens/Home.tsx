@@ -2,8 +2,6 @@ import {
   View,
   Text,
   FlatList,
-  TextInput,
-  Button,
   TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
@@ -85,7 +83,8 @@ const Home = ({ navigation }: any) => {
           keyExtractor={(item) => item.id}
           numColumns={3}
           columnWrapperStyle={{
-            justifyContent: "space-between",
+            justifyContent: "flex-start",
+            gap: 12,
             marginBottom: 10,
           }}
           contentContainerStyle={{ paddingHorizontal: 12, paddingVertical: 9 }}
