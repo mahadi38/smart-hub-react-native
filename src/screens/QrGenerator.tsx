@@ -44,7 +44,7 @@ const QrGenerator = ({ navigation, route }: any) => {
             Type text or link and your QR code updates instantly.
           </Text>
 
-          <View className="rounded-2xl bg-slate-50 border border-slate-200 p-4">
+          <View className="rounded-2xl shadow-md shadow-blue-500 bg-slate-50 border border-slate-200 p-4">
             <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-2">
               Text or URL
             </Text>
@@ -58,7 +58,7 @@ const QrGenerator = ({ navigation, route }: any) => {
             />
           </View>
 
-          <View className="mt-5 rounded-2xl bg-slate-50 border border-slate-200 p-5 items-center justify-center">
+          <View className="mt-5 shadow-md shadow-blue-500 rounded-2xl bg-slate-50 border border-slate-200 p-5 items-center justify-center">
             <QRCode value={safeValue} size={220} color="#0F172A" />
           </View>
 

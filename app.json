@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "smart-tools-hub",
+    "name": "Smart Tools Hub",
     "slug": "smart-tools-hub",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,22 +13,30 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.marufm.smarttoolshub"
+      "bundleIdentifier": "com.mahadi38.smarttoolshub"
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/android-icon-foreground.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundImage": "./assets/android-icon-background.png",
-        "monochromeImage": "./assets/android-icon-monochrome.png",
-        "bundler": "metro"
+        "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.marufm.smarttoolshub"
+      "package": "com.mahadi38.smarttoolshub"
     },
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
-    }
+    },
+    "owner": "mahadi38",
+    "extra": {
+      "eas": {
+        "projectId": "ecf38d99-e2df-4367-9a6b-b5fb1b0b085f"
+      }
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

@@ -19,8 +19,8 @@ interface toolsItems {
 const Home = ({ navigation }: any) => {
   const [searchText, setSearchText] = useState("");
 
-  const filteredData= populerData.filter((item) =>
-    item.title.toLowerCase().includes(searchText.toLowerCase())
+  const filteredData = populerData.filter((item) =>
+    item.title.toLowerCase().includes(searchText.trim().toLowerCase()),
   );
   const renderTools = ({ item }: { item: toolsItems }) => (
     // pressable component for each tool card in home screen, on pressing it navigates to the respective tool.
@@ -47,7 +47,11 @@ const Home = ({ navigation }: any) => {
       <View className="px-4 pt-1 flex-row justify-center items-center gap-2">
         {/* Search input field in home screen */}
 
-        <SearchInput value={searchText} onChangeText={setSearchText} className="w-full" />
+        <SearchInput
+          value={searchText}
+          onChangeText={setSearchText}
+          className="w-full"
+        />
 
         {/* signin/signup button in home screen */}
       </View>
@@ -64,7 +68,7 @@ const Home = ({ navigation }: any) => {
         {/* Flatlist for popular tools in home screen */}
 
         <FlatList
-          data={populerData}
+          data={filteredData}
           renderItem={renderTools}
           keyExtractor={(item) => item.id}
           numColumns={3}
@@ -74,7 +78,7 @@ const Home = ({ navigation }: any) => {
             marginBottom: 10,
           }}
           contentContainerStyle={{ paddingHorizontal: 12, paddingVertical: 9 }}
-          className="flex-1 shadow-lg shadow-blue-700"
+          className="flex-1 shadow-lg shadow-blue-500"
         />
       </View>
     </SafeAreaView>

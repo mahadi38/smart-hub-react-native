@@ -13,7 +13,7 @@ import * as FileSystem from "expo-file-system/legacy";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import PDFDocument from "pdf-lib/cjs/api/PDFDocument";
 import { StandardFonts, rgb } from "pdf-lib";
-import TostNotification from "../components/TostNotification";
+import TostNotification from "../components/shared/TostNotification";
 import { savePdfToMyPdfFolderFromUri } from "../utils/PdfStorage";
 
 const SIDE_PADDING = 28;
@@ -55,6 +55,14 @@ const PageNumber = ({ navigation, route }: any) => {
     });
 
     if (result.canceled) {
+      return;
+    }
+
+    if (result.assets.length > 1) {
+      Alert.alert(
+        "Only one PDF allowed",
+        "Please select only one PDF file in Page Number tool.",
+      );
       return;
     }
 
@@ -141,6 +149,14 @@ const PageNumber = ({ navigation, route }: any) => {
     });
   };
 
+  const handleKeyboardApply = () => {
+    if (isProcessing) {
+      return;
+    }
+
+    applyPageNumber();
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-slate-50">
       <View className="px-5 mt-5 flex-1">
@@ -186,7 +202,7 @@ const PageNumber = ({ navigation, route }: any) => {
             </View>
           </Pressable>
 
-          <View className="mt-4 rounded-2xl bg-slate-50 border border-slate-200 p-4">
+          <View className="mt-4 shadow-md shadow-blue-500 rounded-2xl bg-slate-50 border border-slate-200 p-4">
             <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400">
               Selected file
             </Text>
@@ -195,7 +211,7 @@ const PageNumber = ({ navigation, route }: any) => {
             </Text>
           </View>
 
-          <View className="mt-4 rounded-2xl bg-slate-50 border border-slate-200 p-4">
+          <View className="mt-4 shadow-md shadow-blue-500 rounded-2xl bg-slate-50 border border-slate-200 p-4">
             <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-2">
               Page number format
             </Text>
@@ -204,6 +220,8 @@ const PageNumber = ({ navigation, route }: any) => {
               onChangeText={setFormatText}
               placeholder="Example: Page {page} of {total}"
               placeholderTextColor="#94A3B8"
+              returnKeyType="done"
+              onSubmitEditing={handleKeyboardApply}
               className="rounded-xl border border-slate-300 bg-white px-3 py-3 text-slate-900"
             />
           </View>

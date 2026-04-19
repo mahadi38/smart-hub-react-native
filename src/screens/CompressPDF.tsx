@@ -5,7 +5,7 @@ import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system/legacy";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import PDFDocument from "pdf-lib/cjs/api/PDFDocument";
-import TostNotification from "../components/TostNotification";
+import TostNotification from "../components/shared/TostNotification";
 import { savePdfToMyPdfFolderFromUri } from "../utils/PdfStorage";
 
 const formatKb = (bytes?: number | null) => {
@@ -146,7 +146,7 @@ const CompressPDF = ({ navigation, route }: any) => {
             </View>
           </Pressable>
 
-          <View className="mt-4 rounded-2xl bg-slate-50 border border-slate-200 p-4">
+          <View className="mt-4 shadow-md shadow-blue-500 rounded-2xl bg-slate-50 border border-slate-200 p-4">
             <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400">
               Selected file
             </Text>
@@ -155,7 +155,7 @@ const CompressPDF = ({ navigation, route }: any) => {
             </Text>
           </View>
 
-          <View className="mt-4 rounded-2xl bg-slate-50 border border-slate-200 p-4">
+          <View className="mt-4 shadow-md shadow-blue-500 rounded-2xl bg-slate-50 border border-slate-200 p-4">
             <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-2">
               File size
             </Text>

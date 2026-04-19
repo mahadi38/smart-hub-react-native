@@ -13,7 +13,7 @@ import * as FileSystem from "expo-file-system/legacy";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import PDFDocument from "pdf-lib/cjs/api/PDFDocument";
 import { StandardFonts, rgb, degrees } from "pdf-lib";
-import TostNotification from "../components/TostNotification";
+import TostNotification from "../components/shared/TostNotification";
 import { savePdfToMyPdfFolderFromUri } from "../utils/PdfStorage";
 
 const PdfWatermark = ({ navigation, route }: any) => {
@@ -73,13 +73,13 @@ const PdfWatermark = ({ navigation, route }: any) => {
         const textWidth = font.widthOfTextAtSize(text, fontSize);
 
         page.drawText(text, {
-          x: (width - textWidth) / 2,
-          y: height / 2,
+          x: width - textWidth + 12,
+          y: height / 1.4,
           size: fontSize,
           rotate: degrees(-35),
           font,
           color: rgb(0.6, 0.6, 0.6),
-          opacity: 0.25,
+          opacity: 0.35,
         });
       });
 
@@ -113,6 +113,14 @@ const PdfWatermark = ({ navigation, route }: any) => {
       pdfUri: resultPdfUri,
       title,
     });
+  };
+
+  const handleKeyboardApply = () => {
+    if (isProcessing) {
+      return;
+    }
+
+    applyWatermark();
   };
 
   return (
@@ -158,7 +166,7 @@ const PdfWatermark = ({ navigation, route }: any) => {
             </View>
           </Pressable>
 
-          <View className="mt-4 rounded-2xl bg-slate-50 border border-slate-200 p-4">
+          <View className="mt-4 shadow-md shadow-blue-500 rounded-2xl bg-slate-50 border border-slate-200 p-4">
             <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400">
               Selected file
             </Text>
@@ -167,7 +175,7 @@ const PdfWatermark = ({ navigation, route }: any) => {
             </Text>
           </View>
 
-          <View className="mt-4 rounded-2xl bg-slate-50 border border-slate-200 p-4">
+          <View className="mt-4 shadow-md shadow-blue-500 rounded-2xl bg-slate-50 border border-slate-200 p-4">
             <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-2">
               Watermark text
             </Text>
@@ -176,6 +184,8 @@ const PdfWatermark = ({ navigation, route }: any) => {
               onChangeText={setWatermarkText}
               placeholder="Example: CONFIDENTIAL"
               placeholderTextColor="#94A3B8"
+              returnKeyType="done"
+              onSubmitEditing={handleKeyboardApply}
               className="rounded-xl border border-slate-300 bg-white px-3 py-3 text-slate-900"
             />
           </View>
@@ -196,7 +206,7 @@ const PdfWatermark = ({ navigation, route }: any) => {
                 <AntDesign name="check-circle" size={20} color="#FFFFFF" />
               )}
               <Text className="ml-3 text-base font-semibold text-white">
-                {isProcessing ? "Applying..." : "Apply Watermark"}
+                {isProcessing ? "Applying..." : "Apply"}
               </Text>
             </View>
           </Pressable>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -12,7 +12,7 @@ import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system/legacy";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import PDFDocument from "pdf-lib/cjs/api/PDFDocument";
-import TostNotification from "../components/TostNotification";
+import TostNotification from "../components/shared/TostNotification";
 import { savePdfToMyPdfFolderFromUri } from "../utils/PdfStorage";
 
 const CropPdf = ({ navigation, route }: any) => {
@@ -25,6 +25,9 @@ const CropPdf = ({ navigation, route }: any) => {
   const [resultPdfUri, setResultPdfUri] = useState<string | null>(null);
   const [showToast, setShowToast] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const rightInputRef = useRef<TextInput>(null);
+  const topInputRef = useRef<TextInput>(null);
+  const bottomInputRef = useRef<TextInput>(null);
 
   const title = route?.params?.toolTitle ?? "Crop PDF";
 
@@ -127,6 +130,14 @@ const CropPdf = ({ navigation, route }: any) => {
     });
   };
 
+  const handleKeyboardApply = () => {
+    if (isProcessing) {
+      return;
+    }
+
+    applyCrop();
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-slate-50">
       <View className="px-5 mt-5 flex-1">
@@ -155,7 +166,7 @@ const CropPdf = ({ navigation, route }: any) => {
           </View>
 
           <Text className="text-sm text-slate-500 text-center mb-4">
-            Crop all PDF pages by margins (in points). 72 points = 1 inch.
+            Crop all PDF pages by margins. 72 points = 1 inch.
           </Text>
 
           <Pressable
@@ -170,7 +181,7 @@ const CropPdf = ({ navigation, route }: any) => {
             </View>
           </Pressable>
 
-          <View className="mt-4 rounded-2xl bg-slate-50 border border-slate-200 p-4">
+          <View className="mt-4 shadow-md shadow-blue-500 rounded-2xl bg-slate-50 border border-slate-200 p-4">
             <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400">
               Selected file
             </Text>
@@ -179,7 +190,7 @@ const CropPdf = ({ navigation, route }: any) => {
             </Text>
           </View>
 
-          <View className="mt-4 rounded-2xl bg-slate-50 border border-slate-200 p-4">
+          <View className="mt-4 shadow-md shadow-blue-500 rounded-2xl bg-slate-50 border border-slate-200 p-4">
             <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-2">
               Crop margins (points)
             </Text>
@@ -193,17 +204,24 @@ const CropPdf = ({ navigation, route }: any) => {
                   keyboardType="decimal-pad"
                   placeholder="20"
                   placeholderTextColor="#94A3B8"
+                  returnKeyType="next"
+                  blurOnSubmit={false}
+                  onSubmitEditing={() => rightInputRef.current?.focus()}
                   className="rounded-xl border border-slate-300 bg-white px-3 py-3 text-slate-900"
                 />
               </View>
               <View className="flex-1">
                 <Text className="text-xs text-slate-500 mb-1">Right</Text>
                 <TextInput
+                  ref={rightInputRef}
                   value={rightText}
                   onChangeText={setRightText}
                   keyboardType="decimal-pad"
                   placeholder="20"
                   placeholderTextColor="#94A3B8"
+                  returnKeyType="next"
+                  blurOnSubmit={false}
+                  onSubmitEditing={() => topInputRef.current?.focus()}
                   className="rounded-xl border border-slate-300 bg-white px-3 py-3 text-slate-900"
                 />
               </View>
@@ -213,22 +231,29 @@ const CropPdf = ({ navigation, route }: any) => {
               <View className="flex-1">
                 <Text className="text-xs text-slate-500 mb-1">Top</Text>
                 <TextInput
+                  ref={topInputRef}
                   value={topText}
                   onChangeText={setTopText}
                   keyboardType="decimal-pad"
                   placeholder="20"
                   placeholderTextColor="#94A3B8"
+                  returnKeyType="next"
+                  blurOnSubmit={false}
+                  onSubmitEditing={() => bottomInputRef.current?.focus()}
                   className="rounded-xl border border-slate-300 bg-white px-3 py-3 text-slate-900"
                 />
               </View>
               <View className="flex-1">
                 <Text className="text-xs text-slate-500 mb-1">Bottom</Text>
                 <TextInput
+                  ref={bottomInputRef}
                   value={bottomText}
                   onChangeText={setBottomText}
                   keyboardType="decimal-pad"
                   placeholder="20"
                   placeholderTextColor="#94A3B8"
+                  returnKeyType="done"
+                  onSubmitEditing={handleKeyboardApply}
                   className="rounded-xl border border-slate-300 bg-white px-3 py-3 text-slate-900"
                 />
               </View>

@@ -102,7 +102,7 @@ const FileManager = ({ navigation }: any) => {
           </View>
         </View>
 
-        <View className="rounded-[32px] bg-white shadow-lg shadow-blue-500 border border-blue-100 p-5 flex-1">
+        <View className="rounded-[32px] bg-white shadow-md shadow-blue-500 border border-blue-100 p-5 flex-1">
           <View className="flex-row items-center justify-between mb-4">
             <View>
               <Text className="text-2xl font-bold text-slate-900">
@@ -140,7 +140,7 @@ const FileManager = ({ navigation }: any) => {
               </View>
             }
             renderItem={({ item }) => (
-              <View className="mb-3 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <View className="mb-3 rounded-2xl border  border-slate-200 shadow-sm shadow-blue-500 bg-slate-50 p-4">
                 <View className="flex-row items-center">
                   <View className="h-12 w-12 rounded-2xl bg-blue-100 items-center justify-center mr-3">
                     <AntDesign name="file-pdf" size={24} color="#2563EB" />

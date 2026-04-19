@@ -15,7 +15,12 @@ interface toolsItems {
 }
 
 const AllTools = ({ navigation }: any) => {
-   const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("");
+
+  const filteredTools = allToolsData.filter((item) =>
+    item.title.toLowerCase().includes(query.trim().toLowerCase()),
+  );
+
   const renderTools = ({ item }: { item: toolsItems }) => (
     <ToolsIcons
       id={item.id}
@@ -53,7 +58,7 @@ const AllTools = ({ navigation }: any) => {
         {/* Flatlist For Alltools icon */}
 
         <FlatList
-          data={allToolsData}
+          data={filteredTools}
           renderItem={renderTools}
           keyExtractor={(item) => item.id}
           numColumns={3}

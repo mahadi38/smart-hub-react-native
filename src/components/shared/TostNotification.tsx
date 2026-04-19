@@ -6,13 +6,15 @@ interface TostNotificationProps {
   message: string;
   onHide?: () => void;
   duration?: number;
+  className?: string;
 }
 
 const TostNotification = ({
   visible,
   message,
   onHide,
-  duration = 2200,
+  duration = 3000,
+  className = "",
 }: TostNotificationProps) => {
   useEffect(() => {
     if (!visible) return;
@@ -27,9 +29,11 @@ const TostNotification = ({
   if (!visible) return null;
 
   return (
-    <View className="absolute bottom-28 left-0 right-0 items-center">
+    <View
+      className={`absolute top-28 left-0 right-0 items-center z-50 px-4 ${className}`}
+    >
       <View className="rounded-full bg-blue-500 px-4 py-2 shadow-lg">
-        <Text className="text-white text-xs font-semibold">{message}</Text>
+        <Text className="text-white text-md font-semibold">{message}</Text>
       </View>
     </View>
   );

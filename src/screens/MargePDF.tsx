@@ -5,7 +5,7 @@ import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system/legacy";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import PDFDocument from "pdf-lib/cjs/api/PDFDocument";
-import TostNotification from "../components/TostNotification";
+import TostNotification from "../components/shared/TostNotification";
 import { savePdfToMyPdfFolderFromUri } from "../utils/PdfStorage";
 
 const MargePDF = ({ navigation, route }: any) => {
@@ -22,6 +22,16 @@ const MargePDF = ({ navigation, route }: any) => {
       "Choose multiple PDF files, merge them in order, and download a clean combined file.",
     [],
   );
+
+  const loadPdfFromUri = async (uri: string) => {
+    const base64 = await FileSystem.readAsStringAsync(uri, {
+      encoding: FileSystem.EncodingType.Base64,
+    });
+
+    return PDFDocument.load(base64, {
+      ignoreEncryption: true,
+    });
+  };
 
   const pickPdfFiles = async () => {
     const result = await DocumentPicker.getDocumentAsync({
@@ -54,11 +64,18 @@ const MargePDF = ({ navigation, route }: any) => {
       const mergedPdf = await PDFDocument.create();
 
       for (const file of pickedFiles) {
-        const base64 = await FileSystem.readAsStringAsync(file.uri, {
-          encoding: FileSystem.EncodingType.Base64,
-        });
+        let sourceDoc;
 
-        const sourceDoc = await PDFDocument.load(base64);
+        try {
+          sourceDoc = await loadPdfFromUri(file.uri);
+        } catch (loadError) {
+          Alert.alert(
+            "Merge failed",
+            `Could not open ${file.name || "one selected PDF"}. Some PDFs are encrypted or unsupported.`,
+          );
+          return;
+        }
+
         const pages = await mergedPdf.copyPages(
           sourceDoc,
           sourceDoc.getPageIndices(),
@@ -143,7 +160,7 @@ const MargePDF = ({ navigation, route }: any) => {
             </View>
           </Pressable>
 
-          <View className="mt-5 rounded-2xl bg-slate-50 border border-slate-200 p-4 flex-1">
+          <View className="mt-5 rounded-2xl shadow-md shadow-blue-500 bg-slate-50 border border-slate-200 p-4 flex-1">
             <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-2">
               Selected files ({pickedFiles.length})
             </Text>

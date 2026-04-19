@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -13,7 +13,7 @@ import * as FileSystem from "expo-file-system/legacy";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import PDFDocument from "pdf-lib/cjs/api/PDFDocument";
 import { StandardFonts, rgb } from "pdf-lib";
-import TostNotification from "../components/TostNotification";
+import TostNotification from "../components/shared/TostNotification";
 import { savePdfToMyPdfFolderFromUri } from "../utils/PdfStorage";
 
 const SIDE_PADDING = 28;
@@ -45,6 +45,7 @@ const AddHeaderFooter = ({ navigation, route }: any) => {
   const [resultPdfUri, setResultPdfUri] = useState<string | null>(null);
   const [showToast, setShowToast] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const footerInputRef = useRef<TextInput>(null);
 
   const title = route?.params?.toolTitle ?? "Add Header & Footer";
 
@@ -158,6 +159,14 @@ const AddHeaderFooter = ({ navigation, route }: any) => {
     });
   };
 
+  const handleKeyboardApply = () => {
+    if (isProcessing) {
+      return;
+    }
+
+    applyHeaderFooter();
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-slate-50">
       <View className="px-5 mt-5 flex-1">
@@ -186,8 +195,7 @@ const AddHeaderFooter = ({ navigation, route }: any) => {
           </View>
 
           <Text className="text-sm text-slate-500 text-center mb-4">
-            Pick a PDF, type your header/footer, and apply instantly. Use{" "}
-            <Text className="font-semibold">{"{page}"}</Text> for page numbers.
+            Pick a PDF, type your header/footer,
           </Text>
 
           <Pressable
@@ -202,7 +210,7 @@ const AddHeaderFooter = ({ navigation, route }: any) => {
             </View>
           </Pressable>
 
-          <View className="mt-4 rounded-2xl bg-slate-50 border border-slate-200 p-4">
+          <View className="mt-4 shadow-md shadow-blue-500 rounded-2xl bg-slate-50 border border-slate-200 p-4">
             <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400">
               Selected file
             </Text>
@@ -211,7 +219,7 @@ const AddHeaderFooter = ({ navigation, route }: any) => {
             </Text>
           </View>
 
-          <View className="mt-4 rounded-2xl bg-slate-50 border border-slate-200 p-4">
+          <View className="mt-4 shadow-md shadow-blue-500 rounded-2xl bg-slate-50 border border-slate-200 p-4">
             <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-2">
               Header text
             </Text>
@@ -220,6 +228,9 @@ const AddHeaderFooter = ({ navigation, route }: any) => {
               onChangeText={setHeaderText}
               placeholder="Example: My Company Report - Page {page}"
               placeholderTextColor="#94A3B8"
+              returnKeyType="next"
+              blurOnSubmit={false}
+              onSubmitEditing={() => footerInputRef.current?.focus()}
               className="rounded-xl border border-slate-300 bg-white px-3 py-3 text-slate-900"
             />
 
@@ -227,10 +238,13 @@ const AddHeaderFooter = ({ navigation, route }: any) => {
               Footer text
             </Text>
             <TextInput
+              ref={footerInputRef}
               value={footerText}
               onChangeText={setFooterText}
               placeholder="Example: Confidential | {page}"
               placeholderTextColor="#94A3B8"
+              returnKeyType="done"
+              onSubmitEditing={handleKeyboardApply}
               className="rounded-xl border border-slate-300 bg-white px-3 py-3 text-slate-900"
             />
           </View>

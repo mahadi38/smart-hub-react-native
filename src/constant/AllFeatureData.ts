@@ -175,9 +175,9 @@ export const allToolsData = [
   },
   {
     id: "13",
-    title: "File to ZIP",
-    icon: "file-zip",
-    color: "rrgba(37, 99, 235, 1)",
-    route: "UploadPDF",
+    title: "Split PDF",
+    icon: "split-cells",
+    color: "rgba(37, 99, 235, 1)",
+    route: "SplitPDF",
   },
 ];

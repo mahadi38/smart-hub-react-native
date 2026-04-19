@@ -1,12 +1,27 @@
 import React from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Pdf from "react-native-pdf";
+import * as Sharing from "expo-sharing";
 
 const PdfViewer = ({ navigation, route }: any) => {
   const pdfUri = route?.params?.pdfUri;
   const title = route?.params?.title ?? "View PDF";
+
+  const handleShare = async () => {
+    if (!pdfUri) return;
+
+    if (await Sharing.isAvailableAsync()) {
+      await Sharing.shareAsync(pdfUri, {
+        mimeType: "application/pdf",
+        dialogTitle: "Share PDF",
+      });
+      return;
+    }
+
+    Alert.alert("Share unavailable", pdfUri);
+  };
 
   if (!pdfUri) {
     return (
@@ -56,6 +71,13 @@ const PdfViewer = ({ navigation, route }: any) => {
             trustAllCerts={false}
           />
         </View>
+
+        <Pressable
+          onPress={handleShare}
+          className="absolute bottom-12 right-8 h-14 w-14 items-center justify-center rounded-full bg-blue-600 shadow-xl shadow-blue-500"
+        >
+          <AntDesign name="share-alt" size={22} color="#FFFFFF" />
+        </Pressable>
       </View>
     </SafeAreaView>
   );

@@ -12,7 +12,7 @@ import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system/legacy";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import PDFDocument from "pdf-lib/cjs/api/PDFDocument";
-import TostNotification from "../components/TostNotification";
+import TostNotification from "../components/shared/TostNotification";
 import { savePdfToMyPdfFolderFromUri } from "../utils/PdfStorage";
 
 const PRESETS = {
@@ -128,6 +128,14 @@ const ResizePDF = ({ navigation, route }: any) => {
     });
   };
 
+  const handleKeyboardApply = () => {
+    if (isProcessing) {
+      return;
+    }
+
+    applyResize();
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-slate-50">
       <View className="px-5 mt-5 flex-1">
@@ -156,7 +164,7 @@ const ResizePDF = ({ navigation, route }: any) => {
           </View>
 
           <Text className="text-sm text-slate-500 text-center mb-4">
-            Resize all pages to A4 or Letter. You can also tweak the scale.
+            Resize pages to A4 or Letter. You can tweak the scale.
           </Text>
 
           <Pressable
@@ -171,7 +179,7 @@ const ResizePDF = ({ navigation, route }: any) => {
             </View>
           </Pressable>
 
-          <View className="mt-4 rounded-2xl bg-slate-50 border border-slate-200 p-4">
+          <View className="mt-4 shadow-md shadow-blue-500 rounded-2xl bg-slate-50 border border-slate-200 p-4">
             <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400">
               Selected file
             </Text>
@@ -180,7 +188,7 @@ const ResizePDF = ({ navigation, route }: any) => {
             </Text>
           </View>
 
-          <View className="mt-4 rounded-2xl bg-slate-50 border border-slate-200 p-4">
+          <View className="mt-4 shadow-md shadow-blue-500 rounded-2xl bg-slate-50 border border-slate-200 p-4">
             <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-2">
               Target page size
             </Text>
@@ -216,6 +224,8 @@ const ResizePDF = ({ navigation, route }: any) => {
               keyboardType="decimal-pad"
               placeholder="1.00"
               placeholderTextColor="#94A3B8"
+              returnKeyType="done"
+              onSubmitEditing={handleKeyboardApply}
               className="rounded-xl border border-slate-300 bg-white px-3 py-3 text-slate-900"
             />
           </View>
