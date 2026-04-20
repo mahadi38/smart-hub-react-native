@@ -4,12 +4,12 @@
     "slug": "smart-tools-hub",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/smart-tools-hub-logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/smart-tools-hub-logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#f0fbff"
     },
     "ios": {
       "supportsTablet": true,
@@ -17,26 +17,26 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/icon.png",
-        "backgroundImage": "./assets/android-icon-background.png",
-        "monochromeImage": "./assets/android-icon-monochrome.png"
+        "backgroundColor": "#f0fbff",
+        "foregroundImage": "./assets/smart-tools-hub-logo.png",
+        "backgroundImage": "./assets/smart-tools-hub-logo.png",
+        "monochromeImage": "./assets/smart-tools-hub-logo.png"
       },
       "predictiveBackGestureEnabled": false,
       "package": "com.mahadi38.smarttoolshub"
     },
     "web": {
-      "favicon": "./assets/favicon.png",
+      "favicon": "./assets/smart-tools-hub-logo.png",
       "bundler": "metro"
     },
     "owner": "mahadi38",
-    "extra": {
-      "eas": {
-        "projectId": "ecf38d99-e2df-4367-9a6b-b5fb1b0b085f"
-      }
-    },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "ac23b2c2-6bcd-4a79-9166-6b61af4f53b9"
+      }
+    }
   }
 }

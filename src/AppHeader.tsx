@@ -19,7 +19,7 @@ const AppHeader = () => {
 
         <View className="flex-row gap-2 font-sans items-center justify-center">         
           <Image
-            source={require("../assets/tools-hub-Logo.webp")}
+            source={require("../assets/smart-tools-hub-logo.png")}
             className="w-10 h-10"
           />
           <Text className="text-lg font-extrabold text-blue-500">
