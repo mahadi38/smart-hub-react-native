@@ -13,7 +13,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.mahadi38.smarttoolshub"
+      "bundleIdentifier": "com.smarttoolshub.ssl"
     },
     "android": {
       "adaptiveIcon": {
@@ -23,19 +23,18 @@
         "monochromeImage": "./assets/smart-tools-hub-logo.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.mahadi38.smarttoolshub"
+      "package": "com.smarttoolshub.ssl"
     },
     "web": {
       "favicon": "./assets/smart-tools-hub-logo.png",
       "bundler": "metro"
     },
-    "owner": "mahadi38",
     "plugins": [
       "expo-font"
     ],
     "extra": {
       "eas": {
-        "projectId": "ac23b2c2-6bcd-4a79-9166-6b61af4f53b9"
+        "projectId": "791a62a9-d7ca-4c69-8064-b1bf2dfbbe07"
       }
     }
   }
