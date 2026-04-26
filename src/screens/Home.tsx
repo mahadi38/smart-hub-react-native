@@ -1,10 +1,8 @@
 import { View, Text, FlatList } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 import ToolsIcons from "../components/shared/ToolsIcons";
 import { populerData } from "../constant/AllFeatureData";
-
 import SearchInput from "../components/shared/SearchInput";
 import AppHeader from "../AppHeader";
 
@@ -14,6 +12,7 @@ interface toolsItems {
   icon: string;
   color?: string;
   route: string;
+  bgClassName?: string;
 }
 
 const Home = ({ navigation }: any) => {
@@ -30,6 +29,7 @@ const Home = ({ navigation }: any) => {
       title={item.title}
       icon={item.icon}
       color={item.color}
+      bgClassName={item.bgClassName}
       onPress={() =>
         navigation?.navigate?.(item.route, {
           toolTitle: item.title,
@@ -42,7 +42,7 @@ const Home = ({ navigation }: any) => {
   return (
     <SafeAreaView edges={[]} className="flex-1 bg-gray-100">
       <AppHeader />
-      {/* Signup/signin button pressing it open the auth modal and search input field in home screen header */}
+      
 
       <View className="px-4 pt-1 flex-row justify-center items-center gap-2">
         {/* Search input field in home screen */}
@@ -58,7 +58,7 @@ const Home = ({ navigation }: any) => {
 
       {/* Home screen body with popular tools list using flatlist */}
 
-      <View className="mx-3 my-3 mb-2 flex-1 rounded-3xl bg-white shadow-xl">
+      <View className="mx-3 my-3 mb-2 flex-1 rounded-3xl bg-white shadow-xl shadow-blue-500">
         <View className="mt-2">
           <Text className="text-xl font-bold px-4 mx-auto text-slate-500">
             Popular Tools
@@ -78,7 +78,7 @@ const Home = ({ navigation }: any) => {
             marginBottom: 10,
           }}
           contentContainerStyle={{ paddingHorizontal: 12, paddingVertical: 9 }}
-          className="flex-1 shadow-lg shadow-blue-500"
+          className="flex-1 border-t rounded-lg border-blue-500/20"
         />
       </View>
     </SafeAreaView>

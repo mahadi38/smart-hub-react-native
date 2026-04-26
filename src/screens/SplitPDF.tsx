@@ -15,7 +15,7 @@ import { PDFDocument } from "pdf-lib";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import AppHeader from "../AppHeader";
 
-const SplitPDF = () => {
+const SplitPDF = ({navigation, route}:any) => {
   const [isLoading, setIsLoading] = useState(false);
   const [sourceName, setSourceName] = useState<string>("");
   const [outputFiles, setOutputFiles] = useState<string[]>([]);
@@ -99,8 +99,24 @@ const SplitPDF = () => {
   };
 
   return (
-    <SafeAreaView edges={["left", "right"]} className="flex-1 bg-gray-100">
-      <AppHeader />
+    <SafeAreaView className="flex-1 bg-gray-100">
+        <View className='relative justify-center mb-4 h-11 mt-5 mx-3'>
+          <Pressable
+          onPress={()=>navigation?.goBack?.()}
+          className='h-11 w-11 items-center justify-center rounded-full bg-white border border-slate-200 shadow-sm z-10'
+          >
+            <AntDesign name="arrow-left" size={20} color="#0F172A" />
+          </Pressable>
+
+
+          <View className='absolute left-0 right-0 items-center'>
+            <View className='border bg-white rounded-full px-5 py-2 border-slate-200 shadow-md shadow-blue-500'>
+              <Text className='text-xl font-bold text-slate-700'>
+                {route?.params?.toolTitle ?? "Edit PDF"}
+              </Text>
+            </View>
+          </View>
+        </View>
 
       <View className="mx-3 mt-2 mb-2 flex-1 rounded-3xl bg-white shadow-xl p-4">
         <Text className="text-xl font-bold text-slate-600 mb-1">Split PDF</Text>

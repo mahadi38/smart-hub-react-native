@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from "react";
-import { View, Text, Pressable, Alert, ScrollView } from "react-native";
+import { ActivityIndicator } from "react-native";
+import { View, Text, Pressable, Alert } from "react-native";
+import DraggableFlatList from "react-native-draggable-flatlist";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system/legacy";
@@ -14,6 +16,7 @@ const MargePDF = ({ navigation, route }: any) => {
   >([]);
   const [mergedPdfUri, setMergedPdfUri] = useState<string | null>(null);
   const [showToast, setShowToast] = useState(false);
+  const [isMerging, setIsMerging] = useState(false);
 
   const title = route?.params?.toolTitle ?? "Merge PDF";
 
@@ -59,13 +62,11 @@ const MargePDF = ({ navigation, route }: any) => {
       Alert.alert("Need more files", "Select at least 2 PDF files to merge.");
       return;
     }
-
+    setIsMerging(true);
     try {
       const mergedPdf = await PDFDocument.create();
-
       for (const file of pickedFiles) {
         let sourceDoc;
-
         try {
           sourceDoc = await loadPdfFromUri(file.uri);
         } catch (loadError) {
@@ -73,22 +74,19 @@ const MargePDF = ({ navigation, route }: any) => {
             "Merge failed",
             `Could not open ${file.name || "one selected PDF"}. Some PDFs are encrypted or unsupported.`,
           );
+          setIsMerging(false);
           return;
         }
-
         const pages = await mergedPdf.copyPages(
           sourceDoc,
           sourceDoc.getPageIndices(),
         );
-
         pages.forEach((page) => {
           mergedPdf.addPage(page);
         });
       }
-
       const mergedBase64 = await mergedPdf.saveAsBase64({ dataUri: false });
       const outputPath = `${FileSystem.documentDirectory}merged-${Date.now()}.pdf`;
-
       await FileSystem.writeAsStringAsync(outputPath, mergedBase64, {
         encoding: FileSystem.EncodingType.Base64,
       });
@@ -97,6 +95,8 @@ const MargePDF = ({ navigation, route }: any) => {
       setShowToast(true);
     } catch (error) {
       Alert.alert("Merge failed", "Could not merge selected PDFs.");
+    } finally {
+      setIsMerging(false);
     }
   };
 
@@ -165,41 +165,54 @@ const MargePDF = ({ navigation, route }: any) => {
               Selected files ({pickedFiles.length})
             </Text>
 
-            <ScrollView showsVerticalScrollIndicator={false}>
-              {pickedFiles.length ? (
-                pickedFiles.map((file, index) => (
+            {pickedFiles.length ? (
+              <DraggableFlatList
+                data={pickedFiles}
+                className="mb-3"
+                keyExtractor={(file, index) => `${file.uri}-${index}`}
+                onDragEnd={({ data }) => setPickedFiles(data)}
+                renderItem={({ item, drag, isActive, getIndex }) => (
                   <View
-                    key={`${file.uri}-${index}`}
+                    key={`${item.uri}-${getIndex()}`}
                     className="mb-2 rounded-xl border border-slate-200 bg-white px-3 py-2"
+                    style={{ opacity: isActive ? 0.5 : 1 }}
                   >
                     <Text
                       className="text-sm font-medium text-slate-700"
                       numberOfLines={1}
+                      onLongPress={drag}
                     >
-                      {index + 1}. {file.name}
+                      {`${(getIndex() as number) + 1}. ${item.name}`}
                     </Text>
                   </View>
-                ))
-              ) : (
-                <Text className="text-sm font-medium text-slate-500">
-                  No PDF selected yet
-                </Text>
-              )}
-            </ScrollView>
+                )}
+                contentContainerStyle={{ paddingBottom: 10 }}
+                showsVerticalScrollIndicator={false}
+              />
+            ) : (
+              <Text className="text-sm font-medium text-slate-500">
+                No PDF selected yet
+              </Text>
+            )}
           </View>
 
           <Pressable
-            onPress={mergePdfs}
+            onPress={isMerging ? undefined : mergePdfs}
+            disabled={isMerging || pickedFiles.length < 2}
             className={`mt-6 items-center justify-center rounded-full py-4 shadow-md active:opacity-90 ${
-              pickedFiles.length > 1
+              pickedFiles.length > 1 && !isMerging
                 ? "bg-blue-500 shadow-blue-500"
                 : "bg-slate-300 shadow-slate-300"
             }`}
           >
             <View className="flex-row items-center">
-              <AntDesign name="retweet" size={20} color="#FFFFFF" />
+              {isMerging ? (
+                <ActivityIndicator size="small" color="#FFF" />
+              ) : (
+                <AntDesign name="retweet" size={20} color="#FFFFFF" />
+              )}
               <Text className="ml-3 text-base font-semibold text-white">
-                Merge Now
+                {isMerging ? "Merging..." : "Merge Now"}
               </Text>
             </View>
           </Pressable>

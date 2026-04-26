@@ -12,6 +12,7 @@ interface toolsItems {
   icon: string;
   color?: string;
   route: string;
+  bgClassName?: string;
 }
 
 const AllTools = ({ navigation }: any) => {
@@ -27,6 +28,7 @@ const AllTools = ({ navigation }: any) => {
       title={item.title}
       icon={item.icon}
       color={item.color}
+      bgClassName={item.bgClassName}
       onPress={() =>
         navigation?.navigate?.(item.route, {
           toolTitle: item.title,
@@ -38,7 +40,7 @@ const AllTools = ({ navigation }: any) => {
   );
 
   return (
-    <SafeAreaView edges={["left", "right"]} className="flex-1 bg-gray-100">
+    <SafeAreaView edges={[]} className="flex-1 bg-gray-100">
       <AppHeader />
       <View className="px-4 pt-1 shadow-lg shadow-blue-500">
         {/* Search input component*/}
@@ -46,7 +48,7 @@ const AllTools = ({ navigation }: any) => {
         <SearchInput value={query} onChangeText={setQuery} className="mb-1" />
       </View>
 
-      <View className="mx-3 mt-2 mb-2 flex-1 rounded-3xl bg-white shadow-xl">
+      <View className="mx-3 mt-2 mb-2 flex-1 rounded-3xl bg-white shadow-xl shadow-blue-500">
         {/* All tools Tools list header */}
 
         <View className="mt-2">
@@ -63,11 +65,12 @@ const AllTools = ({ navigation }: any) => {
           keyExtractor={(item) => item.id}
           numColumns={3}
           columnWrapperStyle={{
-            justifyContent: "space-between",
+            justifyContent: "flex-start",
+            gap: 12,
             marginBottom: 10,
           }}
           contentContainerStyle={{ paddingHorizontal: 12, paddingVertical: 9 }}
-          className="flex-1 shadow-lg"
+          className="flex-1 border-t rounded-lg border-blue-500/20"
         />
       </View>
     </SafeAreaView>

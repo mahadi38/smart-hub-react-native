@@ -2,182 +2,215 @@ export const populerData = [
   {
     id: "1",
     title: "Image to PDF",
-    icon: "file-image",
-    color: "rgba(249, 115, 22, 1)",
+    icon: "photo-library",
+    color: "rgba(255, 70, 0, 1)",
     route: "UploadPDF",
+    bgClassName:"bg-orange-100"
   },
   {
     id: "2",
     title: "View PDF",
-    icon: "file-pdf",
-    color: "rgba(59, 130, 246, 1)",
+    icon: "picture-as-pdf",
+    color: "rgba(175, 0, 0, 1)",
     route: "FileManager",
+    bgClassName:"bg-red-100"
   },
   {
     id: "3",
     title: "File",
-    icon: "folder-open",
+    icon: "drive-file-move",
     color: "rgba(14, 179, 16, 1)",
     route: "FileManager",
+    bgClassName:"bg-green-100"
   },
   {
     id: "4",
-    title: "Marge PDF",
-    icon: "fork",
+    title: "Merge PDF",
+    icon: "merge",
     color: "rgba(59, 130, 246, 1)",
     route: "MargePDF",
+    bgClassName:"bg-blue-100"
   },
   {
     id: "5",
     title: "Add Header & Footer",
-    icon: "file-text",
-    color: "rgba(5, 132, 137, 0.8)",
+    icon: "checklist",
+    color: "rgba(14, 100, 16, 1)",
     route: "AddHeaderFooter",
+    bgClassName:"bg-green-100"
   },
   {
     id: "6",
     title: "Page Number",
-    icon: "field-number",
-    color: "rgba(139, 92, 246, 1)",
+    icon: "format-list-numbered",
+    color: "rgba(255, 0, 246, 1)",
     route: "PageNumber",
+    bgClassName:"bg-purple-100"
   },
   {
     id: "7",
     title: "Compress PDF",
     icon: "compress",
-    color: "rgba(236, 72, 153, 1)",
+    color: "rgba(0, 106, 178, 1)",
     route: "CompressPDF",
+    bgClassName:"bg-cyan-100"
   },
   {
     id: "8",
     title: "QR Code Generator",
-    icon: "qrcode",
-    color: "rgba(34, 197, 94, 1)",
+    icon: "qr-code-scanner",
+    color: "rgba(104, 0, 134, 1)",
     route: "QrGenerator",
+    bgClassName:"bg-purple-100"
   },
   {
     id: "9",
     title: "Pdf Watermark",
-    icon: "highlight",
-    color: "rgba(245, 158, 11, 1)",
+    icon: "blur-linear",
+    color: "rgba(255, 18, 20, 1)",
     route: "PdfWatermark",
+    bgClassName:"bg-yellow-100"
   },
   {
     id: "10",
     title: "Resize PDF",
-    icon: "block",
-    color: "rgba(245, 40, 145, 0.8)",
+    icon: "photo-size-select-large",
+    color: "rgba(255, 0, 10, 0.8)",
     route: "ResizePDF",
+    bgClassName:"bg-pink-100"
   },
 
   {
     id: "11",
     title: "QR Code Scanner",
-    icon: "scan",
+    icon: "qr-code",
     color: "rgba(14, 165, 233, 1)",
     route: "QrScanner",
+    bgClassName:"bg-blue-100"
   },
   {
     id: "12",
     title: "Crop PDF",
-    icon: "copyright-circle",
+    icon: "crop",
     color: "rgba(152, 0, 0, 0.8)",
     route: "CropPdf",
+    bgClassName:"bg-red-100"
   },
 ];
 
 export const allToolsData = [
-  {
+ {
     id: "1",
     title: "Compress PDF",
     icon: "compress",
-    color: "rgba(236, 72, 153, 1)",
+    color: "rgba(0, 106, 178, 1)",
     route: "CompressPDF",
+    bgClassName:"bg-cyan-100"
   },
   {
     id: "2",
-    title: "Marge PDF",
-    icon: "fork",
+    title: "Merge PDF",
+    icon: "merge",
     color: "rgba(59, 130, 246, 1)",
     route: "MargePDF",
+    bgClassName:"bg-blue-100"
   },
   {
     id: "3",
     title: "QR Code Generator",
-    icon: "qrcode",
-    color: "rgba(34, 197, 94, 1)",
+    icon: "qr-code-scanner",
+    color: "rgba(104, 0, 134, 1)",
     route: "QrGenerator",
+    bgClassName:"bg-purple-100"
   },
   {
     id: "4",
     title: "Image to PDF",
-    icon: "file-image",
-    color: "rgba(249, 115, 22, 1)",
+    icon: "photo-library",
+    color: "rgba(255, 70, 0, 1)",
     route: "UploadPDF",
+    bgClassName:"bg-orange-100"
   },
   {
     id: "5",
     title: "Page Number",
-    icon: "field-number",
-    color: "rgba(139, 92, 246, 1)",
+    icon: "format-list-numbered",
+    color: "rgba(255, 0, 246, 1)",
     route: "PageNumber",
+    bgClassName:"bg-purple-100"
   },
 
   {
     id: "6",
     title: "Add Header & Footer",
-    icon: "file-text",
-    color: "rgba(5, 132, 137, 0.8)",
+    icon: "checklist",
+    color: "rgba(14, 100, 16, 1)",
     route: "AddHeaderFooter",
+    bgClassName:"bg-green-100"
   },
   {
     id: "7",
     title: "Pdf Watermark",
-    icon: "highlight",
-    color: "rgba(245, 158, 11, 1)",
+    icon: "blur-linear",
+    color: "rgba(255, 18, 20, 1)",
     route: "PdfWatermark",
+    bgClassName:"bg-yellow-100"
   },
-   {
+  {
     id: "8",
     title: "File",
-    icon: "folder-open",
-    color: "rgba(59, 130, 246, 1)",
+    icon: "drive-file-move",
+    color: "rgba(14, 179, 16, 1)",
     route: "FileManager",
+    bgClassName:"bg-green-100"
   },
 
   {
     id: "9",
     title: "View PDF",
-    icon: "file-pdf",
-    color: "rgba(59, 130, 246, 1)",
+    icon: "picture-as-pdf",
+    color: "rgba(175, 0, 0, 1)",
     route: "FileManager",
+    bgClassName:"bg-red-100"
   },
-  {
+ {
     id: "10",
-    title: "QR Code Scanner",
-    icon: "scan",
-    color: "rgba(14, 165, 233, 1)",
-    route: "QrScanner",
+    title: "QR Code Generator",
+    icon: "qr-code-scanner",
+    color: "rgba(104, 0, 134, 1)",
+    route: "QrGenerator",
+    bgClassName:"bg-purple-100"
   },
   {
     id: "11",
     title: "Crop PDF",
-    icon: "copyright-circle",
+    icon: "crop",
     color: "rgba(152, 0, 0, 0.8)",
     route: "CropPdf",
+    bgClassName:"bg-red-100"
   },
   {
     id: "12",
     title: "Resize PDF",
-    icon: "block",
-    color: "rgba(245, 40, 145, 0.8)",
+    icon: "photo-size-select-large",
+    color: "rgba(255, 0, 10, 0.8)",
     route: "ResizePDF",
+    bgClassName:"bg-pink-100"
   },
   {
     id: "13",
     title: "Split PDF",
-    icon: "split-cells",
+    icon: "splitscreen",
     color: "rgba(37, 99, 235, 1)",
     route: "SplitPDF",
+    bgClassName:"bg-blue-100"
   },
+  {
+    id: "14",
+    title: "Edit PDF",
+    icon: "edit",
+    color: "rgba(168, 85, 247, 1)",
+    route: "EditPdf",
+    bgClassName:"bg-purple-100"
+  }
 ];

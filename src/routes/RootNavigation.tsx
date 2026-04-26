@@ -15,6 +15,7 @@ import PdfWatermark from "../screens/PdfWatermark";
 import ResizePDF from "../screens/ResizePDF";
 import CropPdf from "../screens/CropPdf";
 import SplitPDF from "../screens/SplitPDF";
+import EditPdf from "../screens/EditPdf";
 
 const RootStack = createNativeStackNavigator();
 
@@ -35,6 +36,7 @@ const RootNavigation = () => {
       <RootStack.Screen name="ResizePDF" component={ResizePDF} />
       <RootStack.Screen name="CropPdf" component={CropPdf} />
       <RootStack.Screen name="SplitPDF" component={SplitPDF} />
+      <RootStack.Screen name="EditPdf" component={EditPdf} />
     </RootStack.Navigator>
   );
 };
