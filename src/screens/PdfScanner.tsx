@@ -156,9 +156,9 @@ const PdfScanner = ({ navigation }: any) => {
           <DraggableFlatList
             data={pages}
             keyExtractor={(item) => item.id}
-            activationDistance={12}
             onDragEnd={({ data }) => setPages(data)}
             contentContainerStyle={{ paddingBottom: 12 }}
+            
             ListEmptyComponent={
               <View className="flex-1 items-center justify-center py-10">
                 <Text className="text-slate-500 text-sm text-center">

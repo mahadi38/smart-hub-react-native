@@ -174,7 +174,7 @@ const MargePDF = ({ navigation, route }: any) => {
                 renderItem={({ item, drag, isActive, getIndex }) => (
                   <View
                     key={`${item.uri}-${getIndex()}`}
-                    className="mb-2 rounded-xl border border-slate-200 bg-white px-3 py-2"
+                    className="mb-2 rounded-xl border border-slate-200 bg-white px-3 py-5"
                     style={{ opacity: isActive ? 0.5 : 1 }}
                   >
                     <Text

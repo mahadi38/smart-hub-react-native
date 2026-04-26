@@ -226,6 +226,7 @@ const UploadPDF = ({ navigation, route }: any) => {
                 </Text>
 
                 <DraggableFlatList
+                activationDistance={5}
                   data={imageUris}
                   className="mb-3"
                   keyExtractor={(uri, index) => `${uri}-${index}`}
@@ -233,7 +234,7 @@ const UploadPDF = ({ navigation, route }: any) => {
                   renderItem={({ item, drag, isActive,getIndex }) => (
                     <View
                       key={`${item}-${getIndex()}`}
-                      className=" rounded-xl border border-slate-200 bg-white px-3 py-3"
+                      className=" rounded-xl border border-slate-200 bg-white px-3 py-6"
                       style={{ opacity: isActive ? 0.5 : 1 }}
                     >
                       <Text
