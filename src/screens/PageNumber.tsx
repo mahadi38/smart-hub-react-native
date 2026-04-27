@@ -15,6 +15,8 @@ import PDFDocument from "pdf-lib/cjs/api/PDFDocument";
 import { StandardFonts, rgb } from "pdf-lib";
 import TostNotification from "../components/shared/TostNotification";
 import { savePdfToMyPdfFolderFromUri } from "../utils/PdfStorage";
+import { setRecentPdf } from "../utils/RecentPdf";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 
 const SIDE_PADDING = 28;
 
@@ -143,6 +145,9 @@ const PageNumber = ({ navigation, route }: any) => {
       return;
     }
 
+    // Save recent PDF before navigating
+    
+    setRecentPdf(resultPdfUri, selectedPdfName.replace(/\.pdf$/i, ""));
     navigation.navigate("PdfViewer", {
       pdfUri: resultPdfUri,
       title,
@@ -176,10 +181,10 @@ const PageNumber = ({ navigation, route }: any) => {
         </View>
 
         <View className="rounded-[32px] bg-white shadow-lg shadow-blue-500 border border-blue-100 p-6 flex-1">
-          <View className="h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 border border-blue-100 mb-4 self-center">
-            <AntDesign
+          <View className={`h-20 w-20 items-center justify-center rounded-2xl bg-blue-50 border border-blue-100 mb-4 self-center ${route?.params?.bgClassName || "bg-blue-50 border-blue-100"}`}>
+            <MaterialIcons
               name={route?.params?.toolIcon || "field-number"}
-              size={28}
+              size={40}
               color={route?.params?.toolColor || "#8B5CF6"}
             />
           </View>

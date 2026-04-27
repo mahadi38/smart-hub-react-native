@@ -11,7 +11,13 @@ const Tab = createBottomTabNavigator();
 const TabNavigation = () => {
   return (
     // Home Bottom tab
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator screenOptions={{ headerShown: false,
+          tabBarStyle: {
+      borderTopWidth: 1, // or 1 for a thin border
+      borderTopColor: "#BFDBFE", // choose your color
+      // ...other styles
+    },
+     }}>
       <Tab.Screen
         name="Home"
         component={Home}

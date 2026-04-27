@@ -5,15 +5,15 @@ export const populerData = [
     icon: "photo-library",
     color: "rgba(255, 70, 0, 1)",
     route: "UploadPDF",
-    bgClassName:"bg-orange-100"
+    bgClassName: "bg-orange-100",
   },
   {
     id: "2",
-    title: "View PDF",
+    title: "Recent PDF",
     icon: "picture-as-pdf",
     color: "rgba(175, 0, 0, 1)",
-    route: "FileManager",
-    bgClassName:"bg-red-100"
+    route: "PdfViewer",
+    bgClassName: "bg-red-100",
   },
   {
     id: "3",
@@ -21,15 +21,15 @@ export const populerData = [
     icon: "drive-file-move",
     color: "rgba(14, 179, 16, 1)",
     route: "FileManager",
-    bgClassName:"bg-green-100"
+    bgClassName: "bg-green-100",
   },
   {
     id: "4",
     title: "Merge PDF",
-    icon: "merge",
+    icon: "auto-awesome-motion",
     color: "rgba(59, 130, 246, 1)",
     route: "MargePDF",
-    bgClassName:"bg-blue-100"
+    bgClassName: "bg-blue-100",
   },
   {
     id: "5",
@@ -37,15 +37,15 @@ export const populerData = [
     icon: "checklist",
     color: "rgba(14, 100, 16, 1)",
     route: "AddHeaderFooter",
-    bgClassName:"bg-green-100"
+    bgClassName: "bg-green-100",
   },
-  {
-    id: "6",
-    title: "Page Number",
-    icon: "format-list-numbered",
-    color: "rgba(255, 0, 246, 1)",
-    route: "PageNumber",
-    bgClassName:"bg-purple-100"
+   {
+    id: "14",
+    title: "Edit PDF",
+    icon: "edit",
+    color: "rgba(168, 85, 247, 1)",
+    route: "EditPdf",
+    bgClassName: "bg-purple-100",
   },
   {
     id: "7",
@@ -53,7 +53,7 @@ export const populerData = [
     icon: "compress",
     color: "rgba(0, 106, 178, 1)",
     route: "CompressPDF",
-    bgClassName:"bg-cyan-100"
+    bgClassName: "bg-cyan-100",
   },
   {
     id: "8",
@@ -61,7 +61,7 @@ export const populerData = [
     icon: "qr-code-scanner",
     color: "rgba(104, 0, 134, 1)",
     route: "QrGenerator",
-    bgClassName:"bg-purple-100"
+    bgClassName: "bg-purple-100",
   },
   {
     id: "9",
@@ -69,7 +69,7 @@ export const populerData = [
     icon: "blur-linear",
     color: "rgba(255, 18, 20, 1)",
     route: "PdfWatermark",
-    bgClassName:"bg-yellow-100"
+    bgClassName: "bg-yellow-100",
   },
   {
     id: "10",
@@ -77,7 +77,7 @@ export const populerData = [
     icon: "photo-size-select-large",
     color: "rgba(255, 0, 10, 0.8)",
     route: "ResizePDF",
-    bgClassName:"bg-pink-100"
+    bgClassName: "bg-pink-100",
   },
 
   {
@@ -86,7 +86,7 @@ export const populerData = [
     icon: "qr-code",
     color: "rgba(14, 165, 233, 1)",
     route: "QrScanner",
-    bgClassName:"bg-blue-100"
+    bgClassName: "bg-blue-100",
   },
   {
     id: "12",
@@ -94,26 +94,26 @@ export const populerData = [
     icon: "crop",
     color: "rgba(152, 0, 0, 0.8)",
     route: "CropPdf",
-    bgClassName:"bg-red-100"
+    bgClassName: "bg-red-100",
   },
 ];
 
 export const allToolsData = [
- {
+  {
     id: "1",
     title: "Compress PDF",
     icon: "compress",
     color: "rgba(0, 106, 178, 1)",
     route: "CompressPDF",
-    bgClassName:"bg-cyan-100"
+    bgClassName: "bg-cyan-100",
   },
   {
     id: "2",
     title: "Merge PDF",
-    icon: "merge",
+    icon: "auto-awesome-motion",
     color: "rgba(59, 130, 246, 1)",
     route: "MargePDF",
-    bgClassName:"bg-blue-100"
+    bgClassName: "bg-blue-100",
   },
   {
     id: "3",
@@ -121,7 +121,7 @@ export const allToolsData = [
     icon: "qr-code-scanner",
     color: "rgba(104, 0, 134, 1)",
     route: "QrGenerator",
-    bgClassName:"bg-purple-100"
+    bgClassName: "bg-purple-100",
   },
   {
     id: "4",
@@ -129,7 +129,7 @@ export const allToolsData = [
     icon: "photo-library",
     color: "rgba(255, 70, 0, 1)",
     route: "UploadPDF",
-    bgClassName:"bg-orange-100"
+    bgClassName: "bg-orange-100",
   },
   {
     id: "5",
@@ -137,7 +137,7 @@ export const allToolsData = [
     icon: "format-list-numbered",
     color: "rgba(255, 0, 246, 1)",
     route: "PageNumber",
-    bgClassName:"bg-purple-100"
+    bgClassName: "bg-purple-100",
   },
 
   {
@@ -146,7 +146,7 @@ export const allToolsData = [
     icon: "checklist",
     color: "rgba(14, 100, 16, 1)",
     route: "AddHeaderFooter",
-    bgClassName:"bg-green-100"
+    bgClassName: "bg-green-100",
   },
   {
     id: "7",
@@ -154,7 +154,7 @@ export const allToolsData = [
     icon: "blur-linear",
     color: "rgba(255, 18, 20, 1)",
     route: "PdfWatermark",
-    bgClassName:"bg-yellow-100"
+    bgClassName: "bg-yellow-100",
   },
   {
     id: "8",
@@ -162,7 +162,7 @@ export const allToolsData = [
     icon: "drive-file-move",
     color: "rgba(14, 179, 16, 1)",
     route: "FileManager",
-    bgClassName:"bg-green-100"
+    bgClassName: "bg-green-100",
   },
 
   {
@@ -170,16 +170,16 @@ export const allToolsData = [
     title: "View PDF",
     icon: "picture-as-pdf",
     color: "rgba(175, 0, 0, 1)",
-    route: "FileManager",
-    bgClassName:"bg-red-100"
+    route: "PdfViewer",
+    bgClassName: "bg-red-100",
   },
- {
+  {
     id: "10",
     title: "QR Code Generator",
     icon: "qr-code-scanner",
     color: "rgba(104, 0, 134, 1)",
     route: "QrGenerator",
-    bgClassName:"bg-purple-100"
+    bgClassName: "bg-purple-100",
   },
   {
     id: "11",
@@ -187,7 +187,7 @@ export const allToolsData = [
     icon: "crop",
     color: "rgba(152, 0, 0, 0.8)",
     route: "CropPdf",
-    bgClassName:"bg-red-100"
+    bgClassName: "bg-red-100",
   },
   {
     id: "12",
@@ -195,7 +195,7 @@ export const allToolsData = [
     icon: "photo-size-select-large",
     color: "rgba(255, 0, 10, 0.8)",
     route: "ResizePDF",
-    bgClassName:"bg-pink-100"
+    bgClassName: "bg-pink-100",
   },
   {
     id: "13",
@@ -203,7 +203,7 @@ export const allToolsData = [
     icon: "splitscreen",
     color: "rgba(37, 99, 235, 1)",
     route: "SplitPDF",
-    bgClassName:"bg-blue-100"
+    bgClassName: "bg-blue-100",
   },
   {
     id: "14",
@@ -211,6 +211,6 @@ export const allToolsData = [
     icon: "edit",
     color: "rgba(168, 85, 247, 1)",
     route: "EditPdf",
-    bgClassName:"bg-purple-100"
-  }
+    bgClassName: "bg-purple-100",
+  },
 ];

@@ -34,6 +34,7 @@ const AllTools = ({ navigation }: any) => {
           toolTitle: item.title,
           toolIcon: item.icon,
           toolColor: item.color,
+          bgClassName: item.bgClassName,
         })
       }
     />
@@ -48,7 +49,7 @@ const AllTools = ({ navigation }: any) => {
         <SearchInput value={query} onChangeText={setQuery} className="mb-1" />
       </View>
 
-      <View className="mx-3 mt-2 mb-2 flex-1 rounded-3xl bg-white shadow-xl shadow-blue-500">
+      <View className="mx-3 mt-2 mb-2 flex-1 rounded-3xl bg-white border border-blue-200 shadow-xl shadow-blue-500">
         {/* All tools Tools list header */}
 
         <View className="mt-2">

@@ -8,6 +8,7 @@ import TostNotification from "../components/shared/TostNotification";
 import DocumentScanner from "react-native-document-scanner-plugin";
 import DraggableFlatList from "react-native-draggable-flatlist";
 import { useFocusEffect } from "@react-navigation/native";
+import { setRecentPdf } from "../utils/RecentPdf";
 
 const AUTO_DETECT_SCAN_OPTIONS = {
   maxNumDocuments: 20,
@@ -96,6 +97,9 @@ const PdfScanner = ({ navigation }: any) => {
       const saved = await savePdfToMyPdfFolderFromUri(uri, "scanner");
 
       setPdfUri(saved.fileUri);
+      // Save recent PDF before navigating
+      
+      setRecentPdf(saved.fileUri, "Scanned PDF");
       navigation.navigate("PdfViewer", {
         pdfUri: saved.fileUri,
         title: "Scanned PDF",
@@ -158,7 +162,6 @@ const PdfScanner = ({ navigation }: any) => {
             keyExtractor={(item) => item.id}
             onDragEnd={({ data }) => setPages(data)}
             contentContainerStyle={{ paddingBottom: 12 }}
-            
             ListEmptyComponent={
               <View className="flex-1 items-center justify-center py-10">
                 <Text className="text-slate-500 text-sm text-center">

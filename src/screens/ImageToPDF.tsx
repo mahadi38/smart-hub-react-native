@@ -1,14 +1,15 @@
-import { View, Text, Pressable, Alert, ScrollView } from "react-native";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { View, Text, Pressable, Alert } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as DocumentPicker from "expo-document-picker";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import TostNotification from "../components/shared/TostNotification";
 import { savePdfToMyPdfFolderFromUri } from "../utils/PdfStorage";
+import { setRecentPdf } from "../utils/RecentPdf";
 import { createPdfFromImages, PDF_SIZE_LIMIT_MESSAGE } from "../utils/ImagePdf";
 import DocumentScanner from "react-native-document-scanner-plugin";
 import DraggableFlatList from "react-native-draggable-flatlist";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 const AUTO_DETECT_SCAN_OPTIONS = {
   maxNumDocuments: 20,
@@ -130,162 +131,166 @@ const UploadPDF = ({ navigation, route }: any) => {
       Alert.alert("No PDF yet", "Create a PDF first from an image.");
       return;
     }
-
+    // Save recent PDF before navigating
+    await setRecentPdf(
+      generatedPdfUri,
+      pickedFileName?.replace(/\.pdf$/i, "") || toolTitle,
+    );
     navigation.navigate("PdfViewer", {
       pdfUri: generatedPdfUri,
-      title: toolTitle,
+      title: pickedFileName?.replace(/\.pdf$/i, "") || toolTitle,
     });
   };
 
   return (
-   
-      <SafeAreaView className="flex-1 bg-slate-50">
-        <View className="px-5 mt-5 flex-1">
-          <View className="mb-4 h-11 justify-center relative">
-            {/* Go Back Arrow Button */}
+    <SafeAreaView className="flex-1 bg-slate-50">
+      <View className="px-5 mt-5 flex-1">
+        <View className="mb-4 h-11 justify-center relative">
+          {/* Go Back Arrow Button */}
 
-            <Pressable
-              onPress={() => navigation?.goBack?.()}
-              className="h-11 w-11 items-center justify-center rounded-full bg-white border border-slate-200 shadow-sm z-10"
-            >
-              <AntDesign name="arrow-left" size={20} color="#0F172A" />
-            </Pressable>
-            <View className="absolute left-0 right-0 items-center">
-              {/* uplode pdf Title */}
+          <Pressable
+            onPress={() => navigation?.goBack?.()}
+            className="h-11 w-11 items-center justify-center rounded-full bg-white border border-slate-200 shadow-sm z-10"
+          >
+            <AntDesign name="arrow-left" size={20} color="#0F172A" />
+          </Pressable>
+          <View className="absolute left-0 right-0 items-center">
+            {/* uplode pdf Title */}
 
-              <View className="border bg-white px-5 py-2 rounded-full border-slate-200">
-                <Text className="text-2xl font-bold text-slate-900">
-                  Choose a File
-                </Text>
-              </View>
-            </View>
-          </View>
-
-          {/* Uploade download body */}
-
-          <View className="rounded-[32px] bg-white shadow-lg shadow-blue-500 border border-blue-100 p-6 ">
-            <View className="flex justify-center items-center">
-              {/* Dynamic icon and it's color passed from home or AllTools or nevigation drawer */}
-
-              <View className="h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 border border-blue-100 mb-4">
-                <AntDesign
-                  name={route?.params?.toolIcon || "file-pdf"}
-                  size={28}
-                  color={route?.params?.toolColor || "#2563EB"}
-                />
-              </View>
-
-              {/* Dynamic Title passed from home or AllTools or nevigation drawer  */}
-
-              <Text className="text-3xl font-bold text-slate-900">
-                {toolTitle}
-              </Text>
-              <Text className="mt-2 text-sm leading-6 text-slate-500">
-                {isImageToPdf
-                  ? "Choose image files and convert them to PDF instantly."
-                  : "Choose a PDF file from your phone and continue with a clean, beautiful flow."}
+            <View className="border bg-white px-5 py-2 rounded-full border-slate-200">
+              <Text className="text-2xl font-bold text-slate-900">
+                Choose a File
               </Text>
             </View>
-
-            {/* File upload button */}
-
-            <Pressable
-              onPress={handlePickPdf}
-              disabled={isCreatingPdf}
-              className="mt-6 items-center justify-center rounded-full bg-blue-500 py-4 shadow-md shadow-blue-500 active:opacity-90"
-            >
-              <View className="flex-row items-center">
-                <AntDesign name="cloud-upload" size={20} color="#FFFFFF" />
-                <Text className="ml-3 text-base font-semibold text-white">
-                  {isCreatingPdf ? "Creating PDF..." : "Upload"}
-                </Text>
-              </View>
-            </Pressable>
-
-            {isImageToPdf ? (
-              <Pressable
-                onPress={handleScanDocuments}
-                disabled={isScanning || isCreatingPdf}
-                className={`mt-3 items-center justify-center rounded-full py-4 shadow-md active:opacity-90 ${isScanning || isCreatingPdf ? "bg-slate-300 shadow-slate-300" : "bg-slate-700 shadow-slate-500"}`}
-              >
-                <View className="flex-row items-center">
-                  <AntDesign name="scan" size={20} color="#FFFFFF" />
-                  <Text className="ml-3 text-base font-semibold text-white">
-                    {isScanning ? "Scanning..." : "Scan Document"}
-                  </Text>
-                </View>
-              </Pressable>
-            ) : null}
-
-            {/* Selected files display section */}
-
-            {isImageToPdf ? (
-              <View className="mt-5 h-96 rounded-2xl shadow-md shadow-blue-500 bg-slate-50 border border-slate-200 p-4">
-                <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-2">
-                  Selected files ({imageUris.length})
-                </Text>
-
-                <DraggableFlatList
-                activationDistance={5}
-                  data={imageUris}
-                  className="mb-3"
-                  keyExtractor={(uri, index) => `${uri}-${index}`}
-                  onDragEnd={({ data }) => setImageUris(data)}
-                  renderItem={({ item, drag, isActive,getIndex }) => (
-                    <View
-                      key={`${item}-${getIndex()}`}
-                      className=" rounded-xl border border-slate-200 bg-white px-3 py-6"
-                      style={{ opacity: isActive ? 0.5 : 1 }}
-                    >
-                      <Text
-                        className="text-sm font-medium text-slate-700"
-                        numberOfLines={1}
-                        onLongPress={drag}
-                      >
-                        {`${getIndex() as number + 1}. ${getFileNameFromUri(item)}`}
-                      </Text>
-                    </View>
-                  )}
-                  contentContainerStyle={{ paddingBottom: 10 }}
-                  showsVerticalScrollIndicator={false}
-                />
-              </View>
-            ) : (
-              <View className="mt-5 shadow-lg shadow-blue-500 rounded-2xl bg-slate-50 border border-slate-200 p-4">
-                <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400">
-                  Selected file
-                </Text>
-                <Text className="mt-2 text-sm font-medium text-slate-700">
-                  {pickedFileName ?? "No file selected yet"}
-                </Text>
-              </View>
-            )}
-
-            {/* Download File button */}
-
-            <Pressable
-              onPress={handleViewPdf}
-              className={`mt-6 items-center justify-center rounded-full py-4 shadow-md active:opacity-90 ${generatedPdfUri ? "bg-blue-500 shadow-blue-500" : "bg-slate-300 shadow-slate-300"}`}
-            >
-              <View className="flex-row items-center">
-                <AntDesign name="eye" size={20} color="#FFFFFF" />
-                <Text className="ml-3 text-base font-semibold text-white">
-                  View PDF
-                </Text>
-              </View>
-            </Pressable>
           </View>
-
-          {/* Bottom section with two info cards */}
         </View>
 
-        <TostNotification
-          visible={showBottomToast}
-          message={toastMessage}
-          onHide={() => setShowBottomToast(false)}
-        />
-      </SafeAreaView>
-   
+        {/* Uploade download body */}
+
+        <View className="rounded-[32px] bg-white shadow-lg shadow-blue-500 border border-blue-100 p-6 ">
+          <View className="flex justify-center items-center">
+            {/* Dynamic icon and it's color passed from home or AllTools or nevigation drawer */}
+
+            <View
+              className={`h-20 w-20 items-center justify-center rounded-2xl bg-blue-50 border border-blue-100 mb-4 ${route?.params?.bgClassName || "bg-blue-50 border-blue-100"}`}
+            >
+              <MaterialIcons
+                name={route?.params?.toolIcon || "file-pdf"}
+                size={40}
+                color={route?.params?.toolColor || "#2563EB"}
+              />
+            </View>
+
+            {/* Dynamic Title passed from home or AllTools or nevigation drawer  */}
+
+            <Text className="text-3xl font-bold text-slate-900">
+              {toolTitle}
+            </Text>
+            <Text className="mt-2 text-sm leading-6 text-slate-500">
+              {isImageToPdf
+                ? "Choose image files and convert them to PDF instantly."
+                : "Choose a PDF file from your phone and continue with a clean, beautiful flow."}
+            </Text>
+          </View>
+
+          {/* File upload button */}
+
+          <Pressable
+            onPress={handlePickPdf}
+            disabled={isCreatingPdf}
+            className="mt-6 items-center justify-center rounded-full bg-blue-500 py-4 shadow-md shadow-blue-500 active:opacity-90"
+          >
+            <View className="flex-row items-center">
+              <AntDesign name="cloud-upload" size={20} color="#FFFFFF" />
+              <Text className="ml-3 text-base font-semibold text-white">
+                {isCreatingPdf ? "Creating PDF..." : "Upload"}
+              </Text>
+            </View>
+          </Pressable>
+
+          {isImageToPdf ? (
+            <Pressable
+              onPress={handleScanDocuments}
+              disabled={isScanning || isCreatingPdf}
+              className={`mt-3 items-center justify-center rounded-full py-4 shadow-md active:opacity-90 ${isScanning || isCreatingPdf ? "bg-slate-300 shadow-slate-300" : "bg-slate-700 shadow-slate-500"}`}
+            >
+              <View className="flex-row items-center">
+                <AntDesign name="scan" size={20} color="#FFFFFF" />
+                <Text className="ml-3 text-base font-semibold text-white">
+                  {isScanning ? "Scanning..." : "Scan Document"}
+                </Text>
+              </View>
+            </Pressable>
+          ) : null}
+
+          {/* Selected files display section */}
+
+          {isImageToPdf ? (
+            <View className="mt-5 h-96 rounded-2xl shadow-md shadow-blue-500 bg-slate-50 border border-slate-200 p-4">
+              <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-2">
+                Selected files ({imageUris.length})
+              </Text>
+
+              <DraggableFlatList
+                activationDistance={5}
+                data={imageUris}
+                className="mb-3"
+                keyExtractor={(uri, index) => `${uri}-${index}`}
+                onDragEnd={({ data }) => setImageUris(data)}
+                renderItem={({ item, drag, isActive, getIndex }) => (
+                  <View
+                    key={`${item}-${getIndex()}`}
+                    className=" rounded-xl border border-slate-200 bg-white px-3 py-6"
+                    style={{ opacity: isActive ? 0.5 : 1 }}
+                  >
+                    <Text
+                      className="text-sm font-medium text-slate-700"
+                      numberOfLines={1}
+                      onLongPress={drag}
+                    >
+                      {`${(getIndex() as number) + 1}. ${getFileNameFromUri(item)}`}
+                    </Text>
+                  </View>
+                )}
+                contentContainerStyle={{ paddingBottom: 10 }}
+                showsVerticalScrollIndicator={false}
+              />
+            </View>
+          ) : (
+            <View className="mt-5 shadow-lg shadow-blue-500 rounded-2xl bg-slate-50 border border-slate-200 p-4">
+              <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+                Selected file
+              </Text>
+              <Text className="mt-2 text-sm font-medium text-slate-700">
+                {pickedFileName ?? "No file selected yet"}
+              </Text>
+            </View>
+          )}
+
+          {/* Download File button */}
+
+          <Pressable
+            onPress={handleViewPdf}
+            className={`mt-6 items-center justify-center rounded-full py-4 shadow-md active:opacity-90 ${generatedPdfUri ? "bg-blue-500 shadow-blue-500" : "bg-slate-300 shadow-slate-300"}`}
+          >
+            <View className="flex-row items-center">
+              <AntDesign name="eye" size={20} color="#FFFFFF" />
+              <Text className="ml-3 text-base font-semibold text-white">
+                View PDF
+              </Text>
+            </View>
+          </Pressable>
+        </View>
+
+        {/* Bottom section with two info cards */}
+      </View>
+
+      <TostNotification
+        visible={showBottomToast}
+        message={toastMessage}
+        onHide={() => setShowBottomToast(false)}
+      />
+    </SafeAreaView>
   );
 };
 

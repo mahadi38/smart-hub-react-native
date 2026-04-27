@@ -3,12 +3,14 @@ import { ActivityIndicator } from "react-native";
 import { View, Text, Pressable, Alert } from "react-native";
 import DraggableFlatList from "react-native-draggable-flatlist";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { setRecentPdf } from "../utils/RecentPdf";
 import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system/legacy";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import PDFDocument from "pdf-lib/cjs/api/PDFDocument";
 import TostNotification from "../components/shared/TostNotification";
 import { savePdfToMyPdfFolderFromUri } from "../utils/PdfStorage";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 
 const MargePDF = ({ navigation, route }: any) => {
   const [pickedFiles, setPickedFiles] = useState<
@@ -106,6 +108,8 @@ const MargePDF = ({ navigation, route }: any) => {
       return;
     }
 
+    // Save recent PDF before navigating
+    setRecentPdf(mergedPdfUri, "Merged PDF");
     navigation.navigate("PdfViewer", {
       pdfUri: mergedPdfUri,
       title,
@@ -134,10 +138,10 @@ const MargePDF = ({ navigation, route }: any) => {
 
         <View className="rounded-[32px] bg-white shadow-lg shadow-blue-500 border border-blue-100 p-6 flex-1">
           <View className="flex justify-center items-center">
-            <View className="h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 border border-blue-100 mb-4">
-              <AntDesign
+            <View className={`h-20 w-20 items-center justify-center rounded-2xl bg-blue-50 border border-blue-100 mb-4 ${route?.params?.bgClassName || "bg-blue-50 border-blue-100"}`}>
+              <MaterialIcons
                 name={route?.params?.toolIcon || "branches"}
-                size={28}
+                size={40}
                 color={route?.params?.toolColor || "#2563EB"}
               />
             </View>

@@ -1,17 +1,35 @@
-import React from "react";
-import { View, Text, Pressable, Alert } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, Pressable, Alert, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Pdf from "react-native-pdf";
 import * as Sharing from "expo-sharing";
+import { getRecentPdf } from "../utils/RecentPdf";
 
 const PdfViewer = ({ navigation, route }: any) => {
-  const pdfUri = route?.params?.pdfUri;
-  const title = route?.params?.title ?? "View PDF";
+  const [pdfUri, setPdfUri] = useState<string | null>(
+    route?.params?.pdfUri ?? null,
+  );
+  const [title, setTitle] = useState<string>(
+    route?.params?.title ?? "View PDF",
+  );
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!pdfUri) {
+      setLoading(true);
+      getRecentPdf().then((recent) => {
+        if (recent?.pdfUri) {
+          setPdfUri(recent.pdfUri);
+          setTitle(recent.title ?? "Recent PDF");
+        }
+        setLoading(false);
+      });
+    }
+  }, []);
 
   const handleShare = async () => {
     if (!pdfUri) return;
-
     if (await Sharing.isAvailableAsync()) {
       await Sharing.shareAsync(pdfUri, {
         mimeType: "application/pdf",
@@ -19,9 +37,16 @@ const PdfViewer = ({ navigation, route }: any) => {
       });
       return;
     }
-
     Alert.alert("Share unavailable", pdfUri);
   };
+
+  if (loading) {
+    return (
+      <SafeAreaView className="flex-1 bg-slate-50 items-center justify-center">
+        <ActivityIndicator size="large" color="#0F172A" />
+      </SafeAreaView>
+    );
+  }
 
   if (!pdfUri) {
     return (
@@ -48,7 +73,7 @@ const PdfViewer = ({ navigation, route }: any) => {
 
   return (
     <SafeAreaView className="flex-1 bg-slate-50">
-      <View className="px-5 mt-5 flex-1">
+      <View className="px-1 mt-5 flex-1">
         <View className="mb-4 h-11 justify-center relative">
           <Pressable
             onPress={() => navigation?.goBack?.()}

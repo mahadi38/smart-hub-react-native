@@ -3,6 +3,7 @@ import { Pressable, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import QRCode from "react-native-qrcode-svg";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 
 const QrGenerator = ({ navigation, route }: any) => {
   const [text, setText] = useState("https://example.com");
@@ -32,10 +33,10 @@ const QrGenerator = ({ navigation, route }: any) => {
         </View>
 
         <View className="rounded-[32px] bg-white shadow-lg shadow-blue-500 border border-blue-100 p-6 flex-1">
-          <View className="h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 border border-blue-100 mb-4 self-center">
-            <AntDesign
+          <View className={`h-20 w-20 items-center justify-center rounded-2xl bg-blue-50 border border-blue-100 mb-4 self-center ${route?.params?.bgClassName || "bg-blue-50 border-blue-100"}`}>
+            <MaterialIcons
               name={route?.params?.toolIcon || "qrcode"}
-              size={28}
+              size={40}
               color={route?.params?.toolColor || "#22C55E"}
             />
           </View>

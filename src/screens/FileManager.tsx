@@ -15,6 +15,7 @@ import {
   getOrCreateMyPdfFolder,
   listMyPdfFiles,
 } from "../utils/PdfStorage";
+import { setRecentPdf } from "../utils/RecentPdf";
 
 const FileManager = ({ navigation }: any) => {
   const [folderUri, setFolderUri] = useState<string>("");
@@ -43,6 +44,7 @@ const FileManager = ({ navigation }: any) => {
     if (!folderUri) return;
 
     const pdfUri = `${folderUri}${fileName}`;
+    setRecentPdf(pdfUri, fileName.replace(/\.pdf$/i, ""));
     navigation.navigate("PdfViewer", {
       pdfUri,
       title: fileName.replace(/\.pdf$/i, ""),

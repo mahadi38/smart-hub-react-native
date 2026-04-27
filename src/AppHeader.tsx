@@ -10,7 +10,7 @@ const AppHeader = () => {
 
   return (
     <View
-      className="flex-row items-center justify-between bg-white shadow-sm px-3 py-2 pt-5 mb-2 round-lg"
+      className="flex-row items-center justify-between bg-white border-b border-blue-200 shadow-lg shadow-blue-500 px-3 py-2 pt-5 mb-2 round-lg"
       style={{ paddingTop: insets.top + 10 }}
     >
       <View className="flex-1 px-4 py-1 flex-row gap-1 items-center">

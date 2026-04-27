@@ -35,6 +35,7 @@ const Home = ({ navigation }: any) => {
           toolTitle: item.title,
           toolIcon: item.icon,
           toolColor: item.color,
+          bgClassName: item.bgClassName,
         })
       }
     />
@@ -58,7 +59,7 @@ const Home = ({ navigation }: any) => {
 
       {/* Home screen body with popular tools list using flatlist */}
 
-      <View className="mx-3 my-3 mb-2 flex-1 rounded-3xl bg-white shadow-xl shadow-blue-500">
+      <View className="mx-3 my-3 mb-2 flex-1 rounded-3xl border border-blue-200 bg-white shadow-xl shadow-blue-500">
         <View className="mt-2">
           <Text className="text-xl font-bold px-4 mx-auto text-slate-500">
             Popular Tools

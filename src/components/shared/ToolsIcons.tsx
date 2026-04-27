@@ -47,7 +47,7 @@ const ToolsIcons = ({
       <View className="h-10 justify-center">
         <Text
           numberOfLines={2}
-          className="text-center text-[10px] font-bold text-gray-500"
+          className="text-center text-[12px] font-bold text-gray-700"
         >
           {title}
         </Text>

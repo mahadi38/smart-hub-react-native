@@ -15,6 +15,7 @@ import PDFDocument from "pdf-lib/cjs/api/PDFDocument";
 import { StandardFonts, rgb, degrees } from "pdf-lib";
 import TostNotification from "../components/shared/TostNotification";
 import { savePdfToMyPdfFolderFromUri } from "../utils/PdfStorage";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 
 const PdfWatermark = ({ navigation, route }: any) => {
   const [selectedPdfUri, setSelectedPdfUri] = useState<string | null>(null);
@@ -142,10 +143,10 @@ const PdfWatermark = ({ navigation, route }: any) => {
         </View>
 
         <View className="rounded-[32px] bg-white shadow-lg shadow-blue-500 border border-blue-100 p-6 flex-1">
-          <View className="h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 border border-blue-100 mb-4 self-center">
-            <AntDesign
+          <View className={`h-20 w-20 items-center justify-center rounded-2xl bg-blue-50 border border-blue-100 mb-4 self-center ${route?.params?.bgClassName || "bg-blue-50 border-blue-100"}`}>
+            <MaterialIcons
               name={route?.params?.toolIcon || "highlight"}
-              size={28}
+              size={40}
               color={route?.params?.toolColor || "#F59E0B"}
             />
           </View>
@@ -225,7 +226,7 @@ const PdfWatermark = ({ navigation, route }: any) => {
                 View Updated PDF
               </Text>
             </View>
-          </Pressable>
+          </Pressable>         
         </View>
       </View>
 
