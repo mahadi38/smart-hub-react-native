@@ -1,0 +1,46 @@
+Terms and Conditions of Mobile App Using of Smart Software Limited
+
+1. Acceptance of Terms
+- By browsing, accessing, or using the site/services, you agree to these terms and conditions.
+- If you disagree, do not use the site/services.
+
+2. Registration and Use
+- You may need to provide accurate personal information to access certain services.
+- You are responsible for any breach of these terms and its consequences.
+
+3. Prohibited Use
+- Do not use automated means (scripts, crawlers) to access the site/services.
+- Do not interfere with or disrupt the site/services.
+- Do not reproduce, copy, sell, or resell any part of the site/services.
+- Do not use the site/services for illegal, abusive, or offensive content.
+- Do not hack, send spam, or infringe on intellectual property rights.
+
+4. Information Collection
+- Information collected may include name, business details, address, contact info, and other relevant data.
+
+5. Use of Information
+- Information may be used for legal, regulatory, marketing, quality control, and service improvement purposes.
+- Location data may be collected for features like attendance and route tracking, with user consent.
+
+6. Intellectual Property
+- All content is owned or licensed by Smart Software Limited.
+- You may not reproduce, modify, or distribute content without permission.
+
+7. No Warranties
+- Services and content are provided "as is" without warranties of any kind.
+- Smart Software Limited is not liable for errors, omissions, or outdated information.
+
+8. Liability
+- Use of the site/services is at your own risk.
+- Smart Software Limited is not liable for any direct or indirect damages.
+
+9. Indemnity
+- You agree to indemnify Smart Software Limited against any losses or claims arising from your use of the site/services in breach of these terms.
+
+10. Governing Law
+- These terms are governed by the laws of Bangladesh.
+
+11. Contact List Permission
+- The app may access your phone contact list for service purposes.
+
+For the full, detailed terms and conditions, visit: https://www.smartsoftware.com.bd/app-using-terms

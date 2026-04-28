@@ -12,7 +12,7 @@ const DrawerNavigation = () => {
         headerShown: false,
         drawerPosition: "left",
         drawerStyle: {
-      marginTop: 30,
+      marginTop: 1,
     },
       }}
       drawerContent={(props) => <DrawerContent {...props} />}

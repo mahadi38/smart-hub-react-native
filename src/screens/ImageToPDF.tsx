@@ -226,7 +226,7 @@ const UploadPDF = ({ navigation, route }: any) => {
           {/* Selected files display section */}
 
           {isImageToPdf ? (
-            <View className="mt-5 h-96 rounded-2xl shadow-md shadow-blue-500 bg-slate-50 border border-slate-200 p-4">
+            <View className="mt-5 h-80 rounded-2xl shadow-md shadow-blue-500 bg-slate-50 border border-slate-200 p-4">
               <Text className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-2">
                 Selected files ({imageUris.length})
               </Text>

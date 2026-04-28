@@ -2,12 +2,12 @@
   "expo": {
     "name": "Smart Tools Hub",
     "slug": "smart-tools-hub",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/smart-tools-hub-logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/smart-tools-hub-logo.png",
+      "image": "./assets/splashscreenlogo.png",
       "resizeMode": "contain",
       "backgroundColor": "#f0fbff"
     },
@@ -18,7 +18,7 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#f0fbff",
-        "foregroundImage": "./assets/smart-tools-hub-logo.png",
+        "foregroundImage": "./assets/adaptiveicon.png",
         "backgroundImage": "./assets/smart-tools-hub-logo.png",
         "monochromeImage": "./assets/smart-tools-hub-logo.png"
       },
@@ -30,7 +30,8 @@
       "bundler": "metro"
     },
     "plugins": [
-      "expo-font"
+      "expo-font",
+      "expo-web-browser"
     ],
     "extra": {
       "eas": {

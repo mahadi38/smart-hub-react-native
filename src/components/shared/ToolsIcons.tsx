@@ -27,7 +27,7 @@ const ToolsIcons = ({
       onPress={onPress}
       activeOpacity={0.86}
       style={{ width: "31%" }}
-      className="h-36 items-center justify-center px-3 py-4 mb-1 rounded-2xl bg-white border border-blue-200 shadow-lg shadow-blue-700"
+      className="h-36 items-center justify-center px-3 py-4 mb-1 rounded-2xl bg-white border border-blue-200 shadow-md shadow-blue-400"
     >
       {/* Dynamic icon rendering based on the icon name passed as a prop from ant design icons library */}
 

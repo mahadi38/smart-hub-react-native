@@ -4,6 +4,8 @@ import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { allToolsData } from "../constant/AllFeatureData";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { WebView } from 'react-native-webview';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 const DrawerContent = (props: any) => {
   const insets = useSafeAreaInsets();
@@ -13,9 +15,11 @@ const DrawerContent = (props: any) => {
     // Custom Drawer content component which is used in Drawer Navigation
     <DrawerContentScrollView
       {...props}
-      contentContainerStyle={{ paddingTop: insets.top + 12 }}
+      contentContainerStyle={{ paddingTop: insets.top + 20 }}
     >
-      <View className="ml-4 flex-row gap-[1px] font-sans items-center">
+
+      <View className="flex-row items-center justify-between pr-2 border-b mb-5 border-blue-300">
+      <View className="ml-4 flex-row gap-[1px] pb-4 font-sans items-center">
         <Image
           source={require("../../assets/smart-tools-hub-logo.png")}
           className="w-10 h-10"
@@ -23,20 +27,12 @@ const DrawerContent = (props: any) => {
         <Text className="text-lg font-extrabold text-blue-500">
           Smart Tools Hub
         </Text>
+        
       </View>
-      <View className="px-4 mb-4 mt-4">
-        <View className="flex-row items-center justify-between">
-          <Text className="text-lg font-bold ml-2">All Tools</Text>
-
-          {/* Close button for drawer */}
-
-          <TouchableOpacity onPress={() => navigation.closeDrawer()}>
-            <AntDesign name="close" size={24} color="#EF4444" />
+       <TouchableOpacity className="mb-4" onPress={() => navigation.closeDrawer()}>
+            <AntDesign name="close" size={25} color="#EF4444" />
           </TouchableOpacity>
-        </View>
       </View>
-
-      {/* All tools data maped to show in drawer  */}
 
       {allToolsData.map((tool) => (
         <TouchableOpacity
@@ -58,15 +54,41 @@ const DrawerContent = (props: any) => {
                 params: toolParams,
               });
             }
-
             navigation.closeDrawer();
           }}
         >
-          <View className=" rounded-xl mx-4 py-3 border-t border-l border-r mb-[1px] border-blue-300 p-2 bg-white shadow-md shadow-blue-500">
-            <Text className="text-xl text-gray-600 ml-3">{tool.title}</Text>
+          <View className="flex-row justify-start pl-6 rounded-xl py-3 mb-2 p-2 bg-gray-50/50 border border-gray-200 ">
+            <MaterialIcons name={tool.icon as any} size={24} color={tool.color} />
+            <Text className="text-lg text-gray-600 ml-3">{tool.title}</Text>
+            
           </View>
         </TouchableOpacity>
       ))}
+
+      <View className="my-9 px-7 gap-4">
+           <TouchableOpacity
+        onPress={() => navigation.navigate('TermsWebView')}
+        >
+         
+          <View className="flex-row justify-between">
+            <Text className="text-gray-800">
+              Trams and Condition
+            </Text> 
+            <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />          
+          </View>
+        </TouchableOpacity>
+
+           <TouchableOpacity
+        onPress={()=>navigation.navigate("ContactWebview")}
+        >
+          <View className="flex-row justify-between">
+            <Text className="text-gray-800">
+              Contact Us
+            </Text> 
+            <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />            
+          </View>
+        </TouchableOpacity>
+      </View>
     </DrawerContentScrollView>
   );
 };
